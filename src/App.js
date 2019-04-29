@@ -40,7 +40,7 @@ class App extends Component {
             return response.data.RESPONSE.RESULT[0].FerryRoute
         })
     };
-    getDeviations = (ids, timeDiff = "-0.00:00:00") => {
+    getDeviations = (ids, timeDiff = "-0.00:01:00") => {
         let query = {
             objecttype: "Situation",
             FILTER: {
@@ -82,7 +82,7 @@ class App extends Component {
             }
         })
     };
-    getDepartures = (routeId, timeDiff = "-0.00:00:00", limit = 50) => {
+    getDepartures = (routeId, timeDiff = "-0.00:01:00", limit = 10) => {
         let query = {
             objecttype: "FerryAnnouncement",
             limit: limit,
@@ -118,7 +118,8 @@ class App extends Component {
             FerryRoutes: [],
             FerryRoutesResults: [],
             Deviations: [],
-            InfoMessages: []
+            InfoMessages: [],
+            Departures: [],
         };
     }
 
@@ -141,7 +142,7 @@ class App extends Component {
         });
 
         //Test to get departures, this will be called onClick later
-        this.getDepartures(39).then(departures => {
+        this.getDepartures(16).then(departures => {
             console.log(departures)
         })
     }
@@ -172,6 +173,42 @@ class App extends Component {
             FerryRoute: FerryRoute,
             FerryRoutesResults: [],
         });
+        //Get departures and set its state
+        this.getDepartures(FerryRoute.Id).then(Departures => {
+            this.setState({
+                Departures: Departures
+            });
+        });
+    }
+
+    addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    showTime(time) {
+        let unixTimestamp = Date.parse(time);
+        let dateTime = new Date(unixTimestamp);
+        let currentDateTime = new Date();
+        let currentUnixTimestamp = Date.parse(currentDateTime);
+        let diff = (unixTimestamp - currentUnixTimestamp)/1000;
+
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+
+        if(diff <= 0 || diff <= 60){
+            //Diff is passed (1 minute margin by default) or less than 1 minute
+            return "Nu"
+        }else if(diff <= 3600){
+            return Math.ceil(diff/60)+"min"
+        }else if(dateTime.toDateString() === currentDateTime.toDateString()){
+            //If it is the same day, show only time, otherwise show all
+            return this.addZero(dateTime.getHours())+":"+this.addZero(dateTime.getMinutes())
+        }else{
+            //Show time and date
+            return dateTime.getDate()+" "+monthNames[dateTime.getMonth()]+" "+this.addZero(dateTime.getHours())+":"+this.addZero(dateTime.getMinutes())
+        }
     }
 
     render() {
@@ -196,11 +233,16 @@ class App extends Component {
                                 </li>
                             ))}
                         </ul>
-
                     </div>
                 </header>
                 <main>
-
+                    <ul className={"Departures"}>
+                        {this.state.Departures.map((Departure) => (
+                            <li key={Departure.Id}>
+                                {this.showTime(Departure.DepartureTime)}
+                            </li>
+                        ))}
+                    </ul>
                 </main>
             </div>
         );
