@@ -114,6 +114,7 @@ class App extends Component {
         this.state = {
             isLoaded: false,
             search: "",
+            FerryRoute: null,
             FerryRoutes: [],
             FerryRoutesResults: [],
             Deviations: [],
@@ -146,34 +147,61 @@ class App extends Component {
     }
 
     searchChangeHandler = event => {
-        this.setState({search: event.target.value});
         this.setState({
+            search: event.target.value,
             FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
-                    if (FerryRoute.Name.toLowerCase().match(event.target.value) !== null) {
+                if (event.target.value !== "") {
+                    if (FerryRoute.Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
                         return FerryRoute
-                    } else if (FerryRoute.Harbor[0].Name.toLowerCase().match(event.target.value) !== null || FerryRoute.Harbor[1].Name.toLowerCase().match(event.target.value) !== null) {
+                    } else if (FerryRoute.Harbor[0].Name.toLowerCase().match(event.target.value.toLowerCase()) !== null || FerryRoute.Harbor[1].Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
                         return FerryRoute
                     } else {
                         return null
                     }
-                })
+                } else {
+                    return null
+                }
+            }).slice(0, 8)
         });
     };
 
+    chooseFerryRoute(FerryRoute) {
+        //Set search states
+        this.setState({
+            search: FerryRoute.Name,
+            FerryRoute: FerryRoute,
+            FerryRoutesResults: [],
+        });
+    }
+
     render() {
-        console.log(this.state.FerryRoutesResults);
         return (
             <div className="App">
                 <header>
-                    <input
-                        onChange={this.searchChangeHandler}
-                        value={this.state.search}
-                        className={"searchInput"}
-                        name={"search"}
-                        placeholder={"Sök färja"}
-                        autoComplete={"off"}
-                    />
+                    <div id={"searchWrap"}>
+                        <input
+                            onChange={this.searchChangeHandler}
+                            value={this.state.search}
+                            className={"searchInput"}
+                            name={"search"}
+                            placeholder={"Sök färja"}
+                            autoComplete={"off"}
+                        />
+                        <ul className={"searchResults"}>
+                            {this.state.FerryRoutesResults.map((FerryRoutesResult) => (
+                                <li key={FerryRoutesResult.Id} onClick={() => {
+                                    this.chooseFerryRoute(FerryRoutesResult)
+                                }}>
+                                    {FerryRoutesResult.Name}
+                                </li>
+                            ))}
+                        </ul>
+
+                    </div>
                 </header>
+                <main>
+
+                </main>
             </div>
         );
     }
