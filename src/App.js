@@ -112,9 +112,10 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: "",
             isLoaded: false,
+            search: "",
             FerryRoutes: [],
+            FerryRoutesResults: [],
             Deviations: [],
             InfoMessages: []
         };
@@ -146,9 +147,21 @@ class App extends Component {
 
     searchChangeHandler = event => {
         this.setState({search: event.target.value});
+        this.setState({
+            FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
+                    if (FerryRoute.Name.toLowerCase().match(event.target.value) !== null) {
+                        return FerryRoute
+                    } else if (FerryRoute.Harbor[0].Name.toLowerCase().match(event.target.value) !== null || FerryRoute.Harbor[1].Name.toLowerCase().match(event.target.value) !== null) {
+                        return FerryRoute
+                    } else {
+                        return null
+                    }
+                })
+        });
     };
 
     render() {
+        console.log(this.state.FerryRoutesResults);
         return (
             <div className="App">
                 <header>
