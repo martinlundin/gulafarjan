@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios"
+import './assets/css/style.scss';
 
 class App extends Component {
 
@@ -146,7 +147,6 @@ class App extends Component {
         return (
             <div className="App">
             </div>
-                    
         );
     }
 }
