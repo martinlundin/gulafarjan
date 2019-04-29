@@ -1,0 +1,35 @@
+@import "normalize";
+
+*{
+  box-sizing:border-box;
+}
+.App{
+  padding:15px;
+}
+header{
+  width:100%;
+  .searchInput{
+    width:100%;
+    margin:0 auto;
+    border:1px solid black;
+    padding:10px 15px;
+    font-size:18px;
+    border-radius:100px;
+    outline:0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    &:not(:focus){
+      &[value=""]{
+        margin:50vh auto 0;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+}

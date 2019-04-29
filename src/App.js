@@ -112,6 +112,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            search: "",
             isLoaded: false,
             FerryRoutes: [],
             Deviations: [],
@@ -143,9 +144,23 @@ class App extends Component {
         })
     }
 
+    searchChangeHandler = event => {
+        this.setState({search: event.target.value});
+    };
+
     render() {
         return (
             <div className="App">
+                <header>
+                    <input
+                        onChange={this.searchChangeHandler}
+                        value={this.state.search}
+                        className={"searchInput"}
+                        name={"search"}
+                        placeholder={"Sök färja"}
+                        autoComplete={"off"}
+                    />
+                </header>
             </div>
         );
     }
