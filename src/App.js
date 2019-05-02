@@ -237,6 +237,15 @@ class App extends Component {
                     </div>
                 </header>
                 <main>
+                    {this.state.FerryRoute ? 
+                        this.state.Deviations.map((Deviation) => {
+                            if(Deviation.Id === this.state.FerryRoute.DeviationId){
+                                return Deviation.Message
+                            } 
+                        
+                        }) : 
+                        "hej"
+                        }
                     <ul className={"Departures"}>
                         {this.state.Departures.map((Departure) => (
                             <li key={Departure.Id}>
