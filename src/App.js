@@ -242,9 +242,8 @@ class App extends Component {
                             if(Deviation.Id === this.state.FerryRoute.DeviationId){
                                 return Deviation.Message
                             } 
-                        
-                        }) : 
-                        "hej"
+                         }) : 
+                        null
                         }
                     <ul className={"Departures"}>
                         {this.state.Departures.map((Departure) => (
