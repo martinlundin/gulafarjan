@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios"
 import './assets/css/style.scss';
+import HarborFilter from './components/HarborFilter'
+
 
 class App extends Component {
 
@@ -114,6 +116,7 @@ class App extends Component {
         this.state = {
             isLoaded: false,
             search: "",
+            filter: {},
             FerryRoute: null,
             FerryRoutes: [],
             FerryRoutesResults: [],
@@ -150,6 +153,7 @@ class App extends Component {
     searchChangeHandler = event => {
         this.setState({
             search: event.target.value,
+            filter: {},
             Departures: [],
             FerryRoute: null,
             FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
@@ -213,6 +217,12 @@ class App extends Component {
         }
     }
 
+    changeHarbor(Id) {
+        let filter = {...this.state.filter};
+        filter.FromHarbor = {Id};
+        this.setState({filter});
+    }
+
     render() {
         return (
             <div className="App">
@@ -241,24 +251,36 @@ class App extends Component {
                     {(() => {
 
                         if (this.state.FerryRoute !== null) {
-                            console.log(this.state)
                             this.state.Deviations.map((Deviation) => {
                                 if (Deviation.Id === this.state.FerryRoute.DeviationId) {
                                     return Deviation.Message
                                 }
                             });
-                            if (this.state.FerryRoute.hasOwnProperty("Type") && this.state.FerryRoute.Type.Id === 2) {
-                                return "asd"
+                            if (this.state.FerryRoute.Type.Id === 2) {
+                                return <HarborFilter Harbors={this.state.FerryRoute.Harbor}
+                                                     changeHarbor={this.changeHarbor.bind(this)}/>
                             }
                         }
 
                     })()}
                     <ul className={"Departures"}>
-                        {this.state.Departures.map((Departure) => (
-                            <li key={Departure.Id}>
-                                {this.showTime(Departure.DepartureTime)}
-                            </li>
-                        ))}
+                        {this.state.Departures.map((Departure) => {
+                            if(this.state.filter.hasOwnProperty("FromHarbor")){
+                                if(Departure.FromHarbor.Id === this.state.filter.FromHarbor.Id){
+                                    return (
+                                        <li key={Departure.Id}>
+                                            {this.showTime(Departure.DepartureTime)}
+                                        </li>
+                                    )
+                                }
+                            }else{
+                                return (
+                                    <li key={Departure.Id}>
+                                        {this.showTime(Departure.DepartureTime)}
+                                    </li>
+                                )
+                            }
+                        })}
                     </ul>
                 </main>
             </div>
