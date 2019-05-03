@@ -215,9 +215,9 @@ class App extends Component {
         }
     }
 
-    changeHarbor(Id) {
+    changeHarbor(Name) {
         let filter = {...this.state.filter};
-        filter.FromHarbor = {Id};
+        filter.FromHarbor = {Name};
         this.setState({filter});
     }
 
@@ -264,7 +264,7 @@ class App extends Component {
                     <ul className={"Departures"}>
                         {this.state.Departures.map((Departure) => {
                             if(this.state.filter.hasOwnProperty("FromHarbor")){
-                                if(Departure.FromHarbor.Id === this.state.filter.FromHarbor.Id){
+                                if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
                                     return (
                                         <li key={Departure.Id}>
                                             {this.showTime(Departure.DepartureTime)}
