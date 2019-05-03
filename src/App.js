@@ -181,9 +181,7 @@ class App extends Component {
         });
         //Get departures and set its state
         this.getDepartures(FerryRoute.Id).then(Departures => {
-            this.setState({
-                Departures: Departures
-            });
+            this.setState({Departures});
         });
     }
 
