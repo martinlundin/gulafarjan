@@ -151,6 +151,7 @@ class App extends Component {
         this.setState({
             search: event.target.value,
             Departures: [],
+            FerryRoute: [],
             FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
                 if (event.target.value !== "") {
                     if (FerryRoute.Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
