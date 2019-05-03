@@ -11,7 +11,7 @@ class App extends Component {
     api = (query) => {
         return axios({
             method: "post",
-            url: "http://api.trafikinfo.trafikverket.se/v1.3/data.json",
+            url: "https://api.trafikinfo.trafikverket.se/v1.3/data.json",
             headers: {
                 'Content-Type': 'application/json'
             },
