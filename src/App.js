@@ -151,7 +151,7 @@ class App extends Component {
         this.setState({
             search: event.target.value,
             Departures: [],
-            FerryRoute: [],
+            FerryRoute: null,
             FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
                 if (event.target.value !== "") {
                     if (FerryRoute.Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
@@ -195,21 +195,21 @@ class App extends Component {
         let dateTime = new Date(unixTimestamp);
         let currentDateTime = new Date();
         let currentUnixTimestamp = Date.parse(currentDateTime);
-        let diff = (unixTimestamp - currentUnixTimestamp)/1000;
+        let diff = (unixTimestamp - currentUnixTimestamp) / 1000;
 
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
-        if(diff <= 0 || diff <= 60){
+        if (diff <= 0 || diff <= 60) {
             //Diff is passed (1 minute margin by default) or less than 1 minute
             return "Nu"
-        }else if(diff <= 3600){
-            return Math.ceil(diff/60)+"min"
-        }else if(dateTime.toDateString() === currentDateTime.toDateString()){
+        } else if (diff <= 3600) {
+            return Math.ceil(diff / 60) + "min"
+        } else if (dateTime.toDateString() === currentDateTime.toDateString()) {
             //If it is the same day, show only time, otherwise show all
-            return this.addZero(dateTime.getHours())+":"+this.addZero(dateTime.getMinutes())
-        }else{
+            return this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
+        } else {
             //Show time and date
-            return dateTime.getDate()+" "+monthNames[dateTime.getMonth()]+" "+this.addZero(dateTime.getHours())+":"+this.addZero(dateTime.getMinutes())
+            return dateTime.getDate() + " " + monthNames[dateTime.getMonth()] + " " + this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
         }
     }
 
@@ -238,14 +238,21 @@ class App extends Component {
                     </div>
                 </header>
                 <main>
-                    {this.state.FerryRoute ? 
-                        this.state.Deviations.map((Deviation) => {
-                            if(Deviation.Id === this.state.FerryRoute.DeviationId){
-                                return Deviation.Message
-                            } 
-                         }) : 
-                        null
+                    {(() => {
+
+                        if (this.state.FerryRoute !== null) {
+                            console.log(this.state)
+                            this.state.Deviations.map((Deviation) => {
+                                if (Deviation.Id === this.state.FerryRoute.DeviationId) {
+                                    return Deviation.Message
+                                }
+                            });
+                            if (this.state.FerryRoute.hasOwnProperty("Type") && this.state.FerryRoute.Type.Id === 2) {
+                                return "asd"
+                            }
                         }
+
+                    })()}
                     <ul className={"Departures"}>
                         {this.state.Departures.map((Departure) => (
                             <li key={Departure.Id}>
