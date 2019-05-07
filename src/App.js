@@ -150,6 +150,23 @@ class App extends Component {
         })
     }
 
+    sortRelevance(a,b,search){
+        let x = a.Name.toLowerCase().match(search.toLowerCase());
+        let y = b.Name.toLowerCase().match(search.toLowerCase());
+
+        if(x !== null){
+            if(y !== null){
+                if (x.index < y.index) {return -1;}
+                if (x.index > y.index) {return 1;}
+            }
+            return -1
+        }
+        if(y !== null) {
+            return 1
+        }
+        return 0;
+    }
+
     searchChangeHandler = event => {
         this.setState({
             search: event.target.value,
@@ -168,6 +185,8 @@ class App extends Component {
                 } else {
                     return null
                 }
+            }).sort((a,b) => {
+                return this.sortRelevance(a,b,event.target.value)
             }).slice(0, 8)
         });
     };
