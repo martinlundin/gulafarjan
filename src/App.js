@@ -143,11 +143,6 @@ class App extends Component {
                 this.setState({Deviations});
             });
         });
-
-        //Test to get departures, this will be called onClick later
-        this.getDepartures(16).then(departures => {
-            console.log(departures)
-        })
     }
 
     filterFerryRoutes(search){
@@ -245,6 +240,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <div className="App">
                 <header>
