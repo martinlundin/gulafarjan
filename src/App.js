@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import axios from "axios"
 import './assets/css/style.scss';
 import HarborFilter from './components/HarborFilter'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
 
@@ -27,8 +28,8 @@ class App extends Component {
             })
         }).then(response => {
             return response
-
         }).catch(error => {
+            toast.error("Could not contact server");
             throw error.response.data.RESPONSE.RESULT[0].ERROR.MESSAGE
         });
     };
@@ -249,6 +250,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
                 <header>
                     <div id={"searchWrap"}>
                         <input

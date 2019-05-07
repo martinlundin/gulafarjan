@@ -306,6 +306,9 @@ template {
 * {
   box-sizing: border-box; }
 
+.text-center {
+  text-align: center; }
+
 .App {
   padding: 15px; }
   .App header {
