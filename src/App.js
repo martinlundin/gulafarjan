@@ -123,6 +123,7 @@ class App extends Component {
             Deviations: [],
             InfoMessages: [],
             Departures: [],
+            Interval: null,
         };
     }
 
@@ -188,6 +189,7 @@ class App extends Component {
                     return this.sortRelevance(a,b,event.target.value)
                 }).slice(0, 8)
         });
+        clearInterval(this.state.Interval)
     };
 
     chooseFerryRoute(FerryRoute) {
@@ -200,6 +202,11 @@ class App extends Component {
         //Get departures and set its state
         this.getDepartures(FerryRoute.Id).then(Departures => {
             this.setState({Departures});
+            this.state.Interval = setInterval(() => {
+                this.getDepartures(FerryRoute.Id).then(Departures => {
+                    this.setState({Departures});
+                });
+            },30000)
         });
     }
 
@@ -240,7 +247,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className="App">
                 <header>
