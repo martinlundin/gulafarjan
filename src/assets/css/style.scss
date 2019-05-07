@@ -47,6 +47,11 @@
     }
   }
   main{
+    .HarborFilter{
+      .active{
+        font-weight:bold;
+      }
+    }
     .Departures{
       margin: 0;
       padding: 0;

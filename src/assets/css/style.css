@@ -339,6 +339,8 @@ template {
         font-size: 18px; }
         .App header .searchResults li:first-child {
           padding-top: 20px; }
+  .App main .HarborFilter .active {
+    font-weight: bold; }
   .App main .Departures {
     margin: 0;
     padding: 0;
