@@ -43,6 +43,7 @@ class App extends Component {
             return response.data.RESPONSE.RESULT[0].FerryRoute
         })
     };
+
     getDeviations = (ids, timeDiff = "-0.00:01:00") => {
         let query = {
             objecttype: "Situation",
@@ -85,6 +86,7 @@ class App extends Component {
             }
         })
     };
+
     getDepartures = (routeId, timeDiff = "-0.00:01:00", limit = 10) => {
         let query = {
             objecttype: "FerryAnnouncement",
@@ -112,42 +114,7 @@ class App extends Component {
         })
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-            search: "",
-            filter: {},
-            FerryRoute: null,
-            FerryRoutes: [],
-            FerryRoutesResults: [],
-            Deviations: [],
-            InfoMessages: [],
-            Departures: [],
-            Interval: null,
-        };
-    }
-
-    componentDidMount() {
-        this.getFerryRoutes().then(FerryRoutes => {
-
-            console.log("Routes");
-            console.log(FerryRoutes);
-            this.setState({FerryRoutes});
-
-            //Get Deviations for all the FerryRoutes
-            this.getDeviations(FerryRoutes.map(Route => {
-                return Route.DeviationId
-            })).then(Deviations => {
-
-                console.log("Deviations");
-                console.log(Deviations);
-                this.setState({Deviations});
-            });
-        });
-    }
-
-    filterFerryRoutes(search){
+    filterFerryRoutes = (search) => {
         return this.state.FerryRoutes.filter(FerryRoute => {
             if (search !== "") {
                 if (FerryRoute.Name.toLowerCase().match(search.toLowerCase()) !== null) {
@@ -161,9 +128,9 @@ class App extends Component {
                 return null
             }
         });
-    }
+    };
 
-    sortRelevance(a,b,search){
+    sortRelevance = (a,b,search) =>{
         let x = a.Name.toLowerCase().match(search.toLowerCase());
         let y = b.Name.toLowerCase().match(search.toLowerCase());
 
@@ -178,9 +145,9 @@ class App extends Component {
             return 1
         }
         return 0;
-    }
+    };
 
-    searchChangeHandler = event => {
+    searchChangeHandler = (event) => {
         this.setState({
             search: event.target.value,
             filter: {},
@@ -193,7 +160,7 @@ class App extends Component {
         clearInterval(this.state.Interval)
     };
 
-    chooseFerryRoute(FerryRoute) {
+    chooseFerryRoute = (FerryRoute) => {
         //Set search states
         this.setState({
             search: FerryRoute.Name,
@@ -209,16 +176,22 @@ class App extends Component {
                 });
             },30000)
         });
-    }
+    };
 
-    addZero(i) {
+    changeHarbor = (Name) => {
+        let filter = {...this.state.filter};
+        filter.FromHarbor = {Name};
+        this.setState({filter});
+    };
+
+    addZero = (i) => {
         if (i < 10) {
             i = "0" + i;
         }
         return i;
-    }
+    };
 
-    showTime(time) {
+    showTime = (time) => {
         let unixTimestamp = Date.parse(time);
         let dateTime = new Date(unixTimestamp);
         let currentDateTime = new Date();
@@ -239,12 +212,35 @@ class App extends Component {
             //Show time and date
             return dateTime.getDate() + " " + monthNames[dateTime.getMonth()] + " " + this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
         }
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoaded: false,
+            search: "",
+            filter: {},
+            FerryRoute: null,
+            FerryRoutes: [],
+            FerryRoutesResults: [],
+            Deviations: [],
+            InfoMessages: [],
+            Departures: [],
+            Interval: null,
+        };
     }
 
-    changeHarbor(Name) {
-        let filter = {...this.state.filter};
-        filter.FromHarbor = {Name};
-        this.setState({filter});
+    componentDidMount() {
+        this.getFerryRoutes().then(FerryRoutes => {
+            this.setState({FerryRoutes});
+
+            //Get Deviations for all the FerryRoutes
+            this.getDeviations(FerryRoutes.map(Route => {
+                return Route.DeviationId
+            })).then(Deviations => {
+                this.setState({Deviations});
+            });
+        });
     }
 
     render() {
