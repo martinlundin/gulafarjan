@@ -150,6 +150,22 @@ class App extends Component {
         })
     }
 
+    filterFerryRoutes(search){
+        return this.state.FerryRoutes.filter(FerryRoute => {
+            if (search !== "") {
+                if (FerryRoute.Name.toLowerCase().match(search.toLowerCase()) !== null) {
+                    return FerryRoute
+                } else if (FerryRoute.Harbor[0].Name.toLowerCase().match(search.toLowerCase()) !== null || FerryRoute.Harbor[1].Name.toLowerCase().match(search.toLowerCase()) !== null) {
+                    return FerryRoute
+                } else {
+                    return null
+                }
+            } else {
+                return null
+            }
+        });
+    }
+
     sortRelevance(a,b,search){
         let x = a.Name.toLowerCase().match(search.toLowerCase());
         let y = b.Name.toLowerCase().match(search.toLowerCase());
@@ -173,21 +189,9 @@ class App extends Component {
             filter: {},
             Departures: [],
             FerryRoute: null,
-            FerryRoutesResults: this.state.FerryRoutes.filter(FerryRoute => {
-                if (event.target.value !== "") {
-                    if (FerryRoute.Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
-                        return FerryRoute
-                    } else if (FerryRoute.Harbor[0].Name.toLowerCase().match(event.target.value.toLowerCase()) !== null || FerryRoute.Harbor[1].Name.toLowerCase().match(event.target.value.toLowerCase()) !== null) {
-                        return FerryRoute
-                    } else {
-                        return null
-                    }
-                } else {
-                    return null
-                }
-            }).sort((a,b) => {
-                return this.sortRelevance(a,b,event.target.value)
-            }).slice(0, 8)
+            FerryRoutesResults: this.filterFerryRoutes(event.target.value).sort((a,b) => {
+                    return this.sortRelevance(a,b,event.target.value)
+                }).slice(0, 8)
         });
     };
 
