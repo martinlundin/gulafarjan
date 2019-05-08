@@ -17,6 +17,7 @@
       border: 1px solid black;
       padding: 10px 15px;
       font-size: 18px;
+      font-weight: 500;
       border-radius: 100px;
       outline: 0;
       -webkit-transition: all 0.3s ease-in-out;
@@ -40,6 +41,8 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      font-weight: 500;
+      cursor: pointer;
       li {
         padding: 10px 15px;
         font-size:18px;
@@ -51,6 +54,11 @@
   }
   main{
     .HarborFilter{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin: 20px;  
+      cursor: pointer;
       .active{
         font-weight:bold;
       }
@@ -59,6 +67,7 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      font-weight: bold;
       li{
         padding:10px 15px;
       }

@@ -319,6 +319,7 @@ template {
       border: 1px solid black;
       padding: 10px 15px;
       font-size: 18px;
+      font-weight: 500;
       border-radius: 100px;
       outline: 0;
       -webkit-transition: all 0.3s ease-in-out;
@@ -336,17 +337,26 @@ template {
     .App header .searchResults {
       margin: 0;
       padding: 0;
-      list-style: none; }
+      list-style: none;
+      font-weight: 500;
+      cursor: pointer; }
       .App header .searchResults li {
         padding: 10px 15px;
         font-size: 18px; }
         .App header .searchResults li:first-child {
           padding-top: 20px; }
-  .App main .HarborFilter .active {
-    font-weight: bold; }
+  .App main .HarborFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 20px;
+    cursor: pointer; }
+    .App main .HarborFilter .active {
+      font-weight: bold; }
   .App main .Departures {
     margin: 0;
     padding: 0;
-    list-style: none; }
+    list-style: none;
+    font-weight: bold; }
     .App main .Departures li {
       padding: 10px 15px; }
