@@ -1,4 +1,7 @@
+$fa-font-path:        "../fonts/fontawesome/webfonts";
 @import "normalize";
+@import "../fonts/fontawesome/scss/fontawesome.scss";
+@import "../fonts/fontawesome/scss/solid.scss";
 
 * {
   box-sizing: border-box;
@@ -61,6 +64,16 @@
       cursor: pointer;
       .active{
         font-weight:bold;
+        position: relative;
+        &::after {
+          content: "\f0d7";
+          font-family: "Font Awesome 5 free";
+          position: absolute;
+          top: 15px;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
       }
     }
     .Departures{
