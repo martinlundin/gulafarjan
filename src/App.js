@@ -191,7 +191,8 @@ class App extends Component {
         return i;
     };
 
-    showTime = (time) => {
+
+    renderDate = (time) => {
         let unixTimestamp = Date.parse(time);
         let dateTime = new Date(unixTimestamp);
         let currentDateTime = new Date();
@@ -200,17 +201,27 @@ class App extends Component {
 
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
+        if(dateTime.toDateString() !== currentDateTime.toDateString()) {
+            //Show time and date
+            return dateTime.getDate() + " " + monthNames[dateTime.getMonth()]
+        }
+    };
+
+    renderTime = (time) => {
+        let unixTimestamp = Date.parse(time);
+        let dateTime = new Date(unixTimestamp);
+        let currentDateTime = new Date();
+        let currentUnixTimestamp = Date.parse(currentDateTime);
+        let diff = (unixTimestamp - currentUnixTimestamp) / 1000;
+
         if (diff <= 0 || diff <= 60) {
             //Diff is passed (1 minute margin by default) or less than 1 minute
             return "Nu"
         } else if (diff <= 3600) {
             return Math.ceil(diff / 60) + "min"
         } else if (dateTime.toDateString() === currentDateTime.toDateString()) {
-            //If it is the same day, show only time, otherwise show all
+            //If it is the same day, show only time
             return this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
-        } else {
-            //Show time and date
-            return dateTime.getDate() + " " + monthNames[dateTime.getMonth()] + " " + this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
         }
     };
 
@@ -290,14 +301,16 @@ class App extends Component {
                                 if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
                                     return (
                                         <li key={Departure.Id}>
-                                            {this.showTime(Departure.DepartureTime)}
+                                            <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
+                                            <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
                                         </li>
                                     )
                                 }
                             }else{
                                 return (
                                     <li key={Departure.Id}>
-                                        {this.showTime(Departure.DepartureTime)}
+                                        <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
+                                        <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
                                     </li>
                                 )
                             }
