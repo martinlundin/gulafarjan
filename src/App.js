@@ -255,6 +255,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <div className="App">
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
@@ -295,7 +296,9 @@ class App extends Component {
                         }
 
                     })()}
+                    { this.state.Departures.length > 0 ?
                     <ul className={"Departures"}>
+                    <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
                         {this.state.Departures.map((Departure) => {
                             if(this.state.filter.hasOwnProperty("FromHarbor")){
                                 if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
@@ -316,6 +319,7 @@ class App extends Component {
                             }
                         })}
                     </ul>
+                    : null }
                 </main>
             </div>
         );

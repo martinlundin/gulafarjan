@@ -4670,6 +4670,11 @@ readers do not read off random characters that represent icons */
     padding: 0;
     list-style: none;
     font-weight: bold; }
+    .App main .Departures .FerryRouteName {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      border-bottom: 2px solid #c8c8c8; }
     .App main .Departures li {
       padding: 15px;
       border-bottom: 2px solid #c8c8c8; }
