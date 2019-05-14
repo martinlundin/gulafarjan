@@ -201,7 +201,7 @@ class App extends Component {
 
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
-        if(dateTime.toDateString() !== currentDateTime.toDateString()) {
+        if(dateTime.toDateString() === currentDateTime.toDateString()) {
             //Show time and date
             return dateTime.getDate() + " " + monthNames[dateTime.getMonth()]
         }

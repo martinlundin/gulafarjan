@@ -2,6 +2,9 @@ $fa-font-path:        "../fonts/fontawesome/webfonts";
 @import "normalize";
 @import "../fonts/fontawesome/scss/fontawesome.scss";
 @import "../fonts/fontawesome/scss/solid.scss";
+$grey: #c8c8c8;
+$yellow: #fce055;
+
 
 * {
   box-sizing: border-box;
@@ -17,7 +20,7 @@ $fa-font-path:        "../fonts/fontawesome/webfonts";
     .searchInput {
       width: 100%;
       margin: 0 auto;
-      border: 1px solid black;
+      border: 2px solid $grey;
       padding: 10px 15px;
       font-size: 18px;
       font-weight: 500;
@@ -49,6 +52,7 @@ $fa-font-path:        "../fonts/fontawesome/webfonts";
       li {
         padding: 10px 15px;
         font-size:18px;
+        border-bottom: 2px solid $grey;
         &:first-child {
           padding-top: 20px;
         }
@@ -82,7 +86,8 @@ $fa-font-path:        "../fonts/fontawesome/webfonts";
       list-style: none;
       font-weight: bold;
       li{
-        padding:10px 15px;
+        padding:15px;
+        border-bottom: 2px solid $grey;
       }
     }
   }

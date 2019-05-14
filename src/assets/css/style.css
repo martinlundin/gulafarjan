@@ -4617,7 +4617,7 @@ readers do not read off random characters that represent icons */
     .App header .searchInput {
       width: 100%;
       margin: 0 auto;
-      border: 1px solid black;
+      border: 2px solid #c8c8c8;
       padding: 10px 15px;
       font-size: 18px;
       font-weight: 500;
@@ -4643,7 +4643,8 @@ readers do not read off random characters that represent icons */
       cursor: pointer; }
       .App header .searchResults li {
         padding: 10px 15px;
-        font-size: 18px; }
+        font-size: 18px;
+        border-bottom: 2px solid #c8c8c8; }
         .App header .searchResults li:first-child {
           padding-top: 20px; }
   .App main .HarborFilter {
@@ -4669,4 +4670,5 @@ readers do not read off random characters that represent icons */
     list-style: none;
     font-weight: bold; }
     .App main .Departures li {
-      padding: 10px 15px; }
+      padding: 15px;
+      border-bottom: 2px solid #c8c8c8; }
