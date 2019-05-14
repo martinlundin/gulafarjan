@@ -66,6 +66,7 @@ $yellow: #fce055;
       justify-content: space-around;
       margin: 20px;  
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       .active{
         font-weight:bold;
         position: relative;
