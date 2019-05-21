@@ -4612,17 +4612,33 @@ readers do not read off random characters that represent icons */
 
 .App {
   padding: 15px;
-  min-height: 100vh; }
+  min-height: 100vh;
+  background-image: url("../img/boat.jpg");
+  background-size: cover;
+  background-position: 50% 50%; }
+  .App .contentWrapper {
+    -webkit-transition: box-shadow 0.1s ease-in-out;
+    -moz-transition: box-shadow 0.1s ease-in-out;
+    -ms-transition: box-shadow 0.1s ease-in-out;
+    -o-transition: box-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.1s ease-in-out; }
+  .App.searched .contentWrapper {
+    background: rgba(255, 255, 255, 0.92);
+    -webkit-box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
+    -moz-box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
+    box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
+    border-radius: 25px 25px 0 0; }
   .App header {
     width: 100%; }
     .App header .searchInput {
+      background: white;
       width: 100%;
       margin: 0 auto;
-      border: 2px solid #c8c8c8;
+      border: 1px solid #c8c8c8;
       padding: 10px 15px;
       font-size: 18px;
       font-weight: 500;
-      border-radius: 100px;
+      border-radius: 4px;
       outline: 0;
       -webkit-transition: all 0.3s ease-in-out;
       -moz-transition: all 0.3s ease-in-out;
@@ -4650,7 +4666,7 @@ readers do not read off random characters that represent icons */
       .App header .searchResults li {
         padding: 10px 15px;
         font-size: 18px;
-        border-bottom: 2px solid #c8c8c8; }
+        border-bottom: 1px solid #c8c8c8; }
         .App header .searchResults li:first-child {
           padding-top: 20px; }
   .App main .HarborFilter {
@@ -4680,7 +4696,7 @@ readers do not read off random characters that represent icons */
       width: 100%;
       text-align: center;
       display: inline-block;
-      border-bottom: 2px solid #c8c8c8; }
+      border-bottom: 1px solid #c8c8c8; }
     .App main .Departures li {
       padding: 15px;
-      border-bottom: 2px solid #c8c8c8; }
+      border-bottom: 1px solid #c8c8c8; }

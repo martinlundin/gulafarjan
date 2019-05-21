@@ -259,6 +259,7 @@ class App extends Component {
 
             <div className={`App ${this.state.search ? "searched" : ""}`}>
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
+                <div className={"contentWrapper"}>
                 <header>
                     <div id={"searchWrap"}>
                         <input
@@ -321,6 +322,7 @@ class App extends Component {
                     </ul>
                     : null }
                 </main>
+                </div>
             </div>
         );
     }
