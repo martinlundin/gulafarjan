@@ -305,6 +305,12 @@ class App extends Component {
                                 if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
                                     return (
                                         <li key={Departure.Id}>
+                                            <span className={"ferryIcon"}><i className="fas fa-ship"></i></span>
+                                            <span className={"ferryFromTo"}>
+                                                <span className={"ferryFrom"}>{Departure.FromHarbor.Name}</span>
+                                                <i className="fas fa-arrow-right"></i>
+                                                <span className={"ferryTo"}>{Departure.ToHarbor.Name}</span>
+                                            </span>
                                             <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
                                             <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
                                         </li>
@@ -313,6 +319,12 @@ class App extends Component {
                             }else{
                                 return (
                                     <li key={Departure.Id}>
+                                        <span className={"ferryIcon"}><i className="fas fa-ship"></i></span>
+                                        <span className={"ferryFromTo"}>
+                                            <span className={"ferryFrom"}>{Departure.FromHarbor.Name}</span>
+                                            <i className="fas fa-arrow-right"></i>
+                                            <span className={"ferryTo"}>{Departure.ToHarbor.Name}</span>
+                                        </span>
                                         <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
                                         <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
                                     </li>
