@@ -19,32 +19,26 @@ $yellow: #fce055;
   background-image: url("../img/boat.jpg");
   background-size: cover;
   background-position: 50% 50%;
-  
+
   .contentWrapper {
-    -webkit-transition: box-shadow 0.1s ease-in-out;
-    -moz-transition: box-shadow 0.1s ease-in-out;
-    -ms-transition: box-shadow 0.1s ease-in-out;
-    -o-transition: box-shadow 0.1s ease-in-out;
-    transition: box-shadow 0.1s ease-in-out;
+
   }
 
   &.searched{
   .contentWrapper {
     background: rgba(255, 255, 255, 0.92);
-    -webkit-box-shadow: 0px 0px 19px -1px rgba(77,61,77,0.56);
-    -moz-box-shadow: 0px 0px 19px -1px rgba(77,61,77,0.56);
-    box-shadow: 0px 0px 19px -1px rgba(77,61,77,0.56);
-    border-radius: 25px 25px 0 0;
-    
     }
   }
 
   header {
     width: 100%;
     .searchInput {
+      -webkit-box-shadow: 0px 0px 5px -1px rgba(77,61,77,0.56);
+      -moz-box-shadow: 0px 0px 5px -1px rgba(77,61,77,0.56);
+      box-shadow: 0px 0px 5px -1px rgba(77,61,77,0.56);
       background: white;
-      width: 100%;
-      margin: 0 auto;
+      width: calc(100% + 16px);
+      margin: 0 -8px;
       border: 1px solid $grey;
       padding: 10px 15px;
       font-size: 18px;
@@ -63,7 +57,7 @@ $yellow: #fce055;
       transform: translateY(0%);
       &:not(:focus) {
         &[value=""] {
-          margin: calc(50vh - 15px) auto 0;
+          margin: calc(50vh - 15px) -8px 0;
           -webkit-transform: translateY(-50%);
           -moz-transform: translateY(-50%);
           -ms-transform: translateY(-50%);
@@ -80,11 +74,11 @@ $yellow: #fce055;
       font-weight: 500;
       cursor: pointer;
       li {
-        padding: 10px 15px;
+        padding: 15px;
         font-size:18px;
         border-bottom: 1px solid $grey;
-        &:first-child {
-          padding-top: 20px;
+        &:last-child {
+          border-bottom: 1px solid transparent;
         }
       }
     }
@@ -115,16 +109,63 @@ $yellow: #fce055;
       margin: 0;
       padding: 0;
       list-style: none;
-      font-weight: bold;
-    .FerryRouteName{
-      width: 100%;
-      text-align: center;
-      display: inline-block; 
-      border-bottom: 1px solid $grey; 
-    }
+      .FerryRouteName{
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        background: #ececec;
+        padding: 5px 0;
+        margin: 10px 0 0;
+      }
       li{
-        padding:15px;
+        padding:10px 15px;
         border-bottom: 1px solid $grey;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &:last-child {
+          border-bottom: 1px solid transparent;
+        }
+        .ferryIcon{
+          background: black;
+          display: inline-block;
+          font-size: 20px;
+          line-height: 30px;
+          width: 40px;
+          height: 40px;
+          padding: 5px;
+          text-align: center;
+          border-radius: 100px;
+          color: #fce055;
+        }
+        .ferryFromTo{
+          padding: 0 15px;
+          font-size: 15px;
+          i{
+            font-size: 0.6em;
+            display: inline-block;
+            padding: 5px;
+            vertical-align: text-top;
+          }
+        }
+        .ferryDepartureDateTime{
+          text-align: right;
+          position:relative;
+          .time, .date{
+            display:block;
+          }
+          .time{
+            font-weight: bold;
+            font-size:24px;
+          }
+          .date{
+            font-size:11px;
+            position:absolute;
+            right:0;
+            white-space: nowrap;
+          }
+        }
+
       }
     }
   }
