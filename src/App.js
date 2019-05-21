@@ -255,9 +255,9 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
-            <div className="App">
+
+            <div className={`App ${this.state.search ? "searched" : ""}`}>
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
                 <header>
                     <div id={"searchWrap"}>

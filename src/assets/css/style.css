@@ -4611,7 +4611,8 @@ readers do not read off random characters that represent icons */
   text-align: center; }
 
 .App {
-  padding: 15px; }
+  padding: 15px;
+  min-height: 100vh; }
   .App header {
     width: 100%; }
     .App header .searchInput {
@@ -4627,7 +4628,12 @@ readers do not read off random characters that represent icons */
       -moz-transition: all 0.3s ease-in-out;
       -ms-transition: all 0.3s ease-in-out;
       -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out; }
+      transition: all 0.3s ease-in-out;
+      -webkit-transform: translateY(0%);
+      -moz-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+      -o-transform: translateY(0%);
+      transform: translateY(0%); }
       .App header .searchInput:not(:focus)[value=""] {
         margin: calc(50vh - 15px) auto 0;
         -webkit-transform: translateY(-50%);
