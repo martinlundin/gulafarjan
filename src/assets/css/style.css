@@ -4616,24 +4616,17 @@ readers do not read off random characters that represent icons */
   background-image: url("../img/boat.jpg");
   background-size: cover;
   background-position: 50% 50%; }
-  .App .contentWrapper {
-    -webkit-transition: box-shadow 0.1s ease-in-out;
-    -moz-transition: box-shadow 0.1s ease-in-out;
-    -ms-transition: box-shadow 0.1s ease-in-out;
-    -o-transition: box-shadow 0.1s ease-in-out;
-    transition: box-shadow 0.1s ease-in-out; }
   .App.searched .contentWrapper {
-    background: rgba(255, 255, 255, 0.92);
-    -webkit-box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
-    -moz-box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
-    box-shadow: 0px 0px 19px -1px rgba(77, 61, 77, 0.56);
-    border-radius: 25px 25px 0 0; }
+    background: rgba(255, 255, 255, 0.92); }
   .App header {
     width: 100%; }
     .App header .searchInput {
+      -webkit-box-shadow: 0px 0px 5px -1px rgba(77, 61, 77, 0.56);
+      -moz-box-shadow: 0px 0px 5px -1px rgba(77, 61, 77, 0.56);
+      box-shadow: 0px 0px 5px -1px rgba(77, 61, 77, 0.56);
       background: white;
-      width: 100%;
-      margin: 0 auto;
+      width: calc(100% + 16px);
+      margin: 0 -8px;
       border: 1px solid #c8c8c8;
       padding: 10px 15px;
       font-size: 18px;
@@ -4651,7 +4644,7 @@ readers do not read off random characters that represent icons */
       -o-transform: translateY(0%);
       transform: translateY(0%); }
       .App header .searchInput:not(:focus)[value=""] {
-        margin: calc(50vh - 15px) auto 0;
+        margin: calc(50vh - 15px) -8px 0;
         -webkit-transform: translateY(-50%);
         -moz-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
@@ -4664,11 +4657,11 @@ readers do not read off random characters that represent icons */
       font-weight: 500;
       cursor: pointer; }
       .App header .searchResults li {
-        padding: 10px 15px;
+        padding: 15px;
         font-size: 18px;
         border-bottom: 1px solid #c8c8c8; }
-        .App header .searchResults li:first-child {
-          padding-top: 20px; }
+        .App header .searchResults li:last-child {
+          border-bottom: 1px solid transparent; }
   .App main .HarborFilter {
     display: flex;
     align-items: center;
@@ -4690,13 +4683,51 @@ readers do not read off random characters that represent icons */
   .App main .Departures {
     margin: 0;
     padding: 0;
-    list-style: none;
-    font-weight: bold; }
+    list-style: none; }
     .App main .Departures .FerryRouteName {
       width: 100%;
       text-align: center;
       display: inline-block;
-      border-bottom: 1px solid #c8c8c8; }
+      background: #ececec;
+      padding: 5px 0;
+      margin: 10px 0 0; }
     .App main .Departures li {
-      padding: 15px;
-      border-bottom: 1px solid #c8c8c8; }
+      padding: 10px 15px;
+      border-bottom: 1px solid #c8c8c8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      .App main .Departures li:last-child {
+        border-bottom: 1px solid transparent; }
+      .App main .Departures li .ferryIcon {
+        background: black;
+        display: inline-block;
+        font-size: 20px;
+        line-height: 30px;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        text-align: center;
+        border-radius: 100px;
+        color: #fce055; }
+      .App main .Departures li .ferryFromTo {
+        padding: 0 15px;
+        font-size: 15px; }
+        .App main .Departures li .ferryFromTo i {
+          font-size: 0.6em;
+          display: inline-block;
+          padding: 5px;
+          vertical-align: text-top; }
+      .App main .Departures li .ferryDepartureDateTime {
+        text-align: right;
+        position: relative; }
+        .App main .Departures li .ferryDepartureDateTime .time, .App main .Departures li .ferryDepartureDateTime .date {
+          display: block; }
+        .App main .Departures li .ferryDepartureDateTime .time {
+          font-weight: bold;
+          font-size: 24px; }
+        .App main .Departures li .ferryDepartureDateTime .date {
+          font-size: 11px;
+          position: absolute;
+          right: 0;
+          white-space: nowrap; }
