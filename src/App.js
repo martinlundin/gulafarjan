@@ -150,6 +150,7 @@ class App extends Component {
     };
 
     searchChangeHandler = (event) => {
+        window.scrollTo(0, 0);
         this.setState({
             search: event.target.value,
             filter: {},
@@ -232,7 +233,7 @@ class App extends Component {
                 return Route.DeviationId
             })).then(Deviations => {
                 this.setState({Deviations});
-            });
+                });
         });
     }
 
