@@ -187,10 +187,6 @@ class App extends Component {
     };
 
     renderDate = (time) => {
-        let unixTimestamp = moment(time).unix();
-        let currentUnixTimestamp = moment().unix();
-        let diff = unixTimestamp - currentUnixTimestamp;
-
         if(moment(time).format('LL') !== moment().format('LL')) {
             return moment(time).format('LL');
         }
