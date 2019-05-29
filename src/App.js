@@ -4,6 +4,8 @@ import './assets/css/style.scss';
 import HarborFilter from './components/HarborFilter'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment'
+import 'moment/locale/sv'
 
 class App extends Component {
 
@@ -184,44 +186,28 @@ class App extends Component {
         this.setState({filter});
     };
 
-    addZero = (i) => {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
-    };
-
-
     renderDate = (time) => {
-        let unixTimestamp = Date.parse(time);
-        let dateTime = new Date(unixTimestamp);
-        let currentDateTime = new Date();
-        let currentUnixTimestamp = Date.parse(currentDateTime);
-        let diff = (unixTimestamp - currentUnixTimestamp) / 1000;
+        let unixTimestamp = moment(time).unix();
+        let currentUnixTimestamp = moment().unix();
+        let diff = unixTimestamp - currentUnixTimestamp;
 
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
-
-        if(dateTime.toDateString() !== currentDateTime.toDateString()) {
-            //Show time and date
-            return dateTime.getDate() + " " + monthNames[dateTime.getMonth()]
+        if(moment(time).format('LL') !== moment().format('LL')) {
+            return moment(time).format('LL');
         }
     };
 
     renderTime = (time) => {
-        let unixTimestamp = Date.parse(time);
-        let dateTime = new Date(unixTimestamp);
-        let currentDateTime = new Date();
-        let currentUnixTimestamp = Date.parse(currentDateTime);
-        let diff = (unixTimestamp - currentUnixTimestamp) / 1000;
+        let unixTimestamp = moment(time).unix();
+        let currentUnixTimestamp = moment().unix();
+        let diff = unixTimestamp - currentUnixTimestamp;
 
-        if (diff <= 0 || diff <= 60) {
-            //Diff is passed (1 minute margin by default) or less than 1 minute
+        //Diff is passed (1 minute margin by default) or less than 1 minute
+        if (diff <= 60) {
             return "Nu"
         } else if (diff <= 3600) {
             return Math.ceil(diff / 60) + "min"
-        } else if (dateTime.toDateString() === currentDateTime.toDateString()) {
-            //If it is the same day, show only time
-            return this.addZero(dateTime.getHours()) + ":" + this.addZero(dateTime.getMinutes())
+        }  else {
+            return moment(time).format('LT');
         }
     };
 
