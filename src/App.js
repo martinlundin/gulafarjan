@@ -173,11 +173,13 @@ class App extends Component {
         //Get departures and set its state
         this.getDepartures(FerryRoute.Id).then(Departures => {
             this.setState({Departures});
-            this.state.Interval = setInterval(() => {
-                this.getDepartures(FerryRoute.Id).then(Departures => {
-                    this.setState({Departures});
-                });
-            },30000)
+            this.setState({
+                Interval: setInterval(() => {
+                    this.getDepartures(FerryRoute.Id).then(Departures => {
+                        this.setState({Departures});
+                    });
+                },30000)
+            })
         });
     };
 
