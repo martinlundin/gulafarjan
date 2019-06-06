@@ -16,17 +16,19 @@ $yellow: #fce055;
 .App {
   padding: 15px;
   min-height:100vh;
-  background-image: url("../img/island.jpg");
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(252, 255, 255, 0)), url("../img/island.jpg");
   background-size: cover;
   background-position: 50% 50%;
 
   .contentWrapper {
-
+    max-width:600px;
+    margin:0 auto;
   }
 
   &.searched{
-  .contentWrapper {
-    background: rgba(255, 255, 255, 0.92);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(252, 255, 255, 0.5)), url("../img/island.jpg");
+    .contentWrapper {
+      background: rgba(255, 255, 255, 0.92);
     }
   }
 
