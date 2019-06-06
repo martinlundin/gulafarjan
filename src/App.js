@@ -160,7 +160,9 @@ class App extends Component {
                     return this.sortRelevance(a,b,event.target.value)
                 }).slice(0, 8)
         });
-        clearInterval(this.state.Interval)
+        clearInterval(this.state.Interval);
+        //Remove FerryRoute from localstorage
+        localStorage.setItem("FerryRoute", null);
     };
 
     chooseFerryRoute = (FerryRoute) => {
@@ -181,6 +183,8 @@ class App extends Component {
                 },30000)
             })
         });
+        //Set local storage for next time site is opened
+        localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
     };
 
     changeHarbor = (Name) => {
@@ -236,6 +240,11 @@ class App extends Component {
             })).then(Deviations => {
                 this.setState({Deviations});
                 });
+
+            //If localstorage is set choose that route
+            if(localStorage.getItem("FerryRoute")){
+                this.chooseFerryRoute(JSON.parse(localStorage.getItem("FerryRoute")))
+            }
         });
     }
 
