@@ -335,6 +335,11 @@ class App extends Component {
                         })}
                     </ul>
                     : null }
+
+                    <div id={"home"}>
+                        Hitta avgångar för vägverkets bilfärjor.<br/>
+                        Sök genom i rutan efter färjeled eller hamn.
+                    </div>
                 </main>
                 </div>
             </div>
