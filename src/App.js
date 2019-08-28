@@ -166,25 +166,27 @@ class App extends Component {
     };
 
     chooseFerryRoute = (FerryRoute) => {
-        //Set search states
-        this.setState({
-            search: FerryRoute.Name,
-            FerryRoute: FerryRoute,
-            FerryRoutesResults: [],
-        });
-        //Get departures and set its state
-        this.getDepartures(FerryRoute.Id).then(Departures => {
-            this.setState({Departures});
+        if(FerryRoute !== null){
+            //Set search states
             this.setState({
-                Interval: setInterval(() => {
-                    this.getDepartures(FerryRoute.Id).then(Departures => {
-                        this.setState({Departures});
-                    });
-                },30000)
-            })
-        });
-        //Set local storage for next time site is opened
-        localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
+                search: FerryRoute.Name,
+                FerryRoute: FerryRoute,
+                FerryRoutesResults: [],
+            });
+            //Get departures and set its state
+            this.getDepartures(FerryRoute.Id).then(Departures => {
+                this.setState({Departures});
+                this.setState({
+                    Interval: setInterval(() => {
+                        this.getDepartures(FerryRoute.Id).then(Departures => {
+                            this.setState({Departures});
+                        });
+                    },30000)
+                })
+            });
+            //Set local storage for next time site is opened
+            localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
+        }
     };
 
     changeHarbor = (Name) => {
