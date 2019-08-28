@@ -4690,6 +4690,11 @@ readers do not read off random characters that represent icons */
           left: 0;
           right: 0;
           text-align: center; }
+    .App main .Deviation {
+      border-left: 5px solid #ff4e42;
+      padding: 10px;
+      margin: 5px;
+      background: #eee; }
     .App main .Departures {
       margin: 0;
       padding: 0;

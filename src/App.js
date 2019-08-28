@@ -279,19 +279,28 @@ class App extends Component {
                 </header>
                 <main>
                     {(() => {
-
                         if (this.state.FerryRoute !== null) {
-                            this.state.Deviations.map((Deviation) => {
+                            return this.state.Deviations.map((Deviation) => {
+                                console.log(Deviation.Id);
+                                console.log(this.state.FerryRoute.DeviationId);
+                                console.log(Deviation);
                                 if (Deviation.Id === this.state.FerryRoute.DeviationId) {
-                                    return Deviation.Message
+                                    return (
+                                        <div className={`Deviation`}>
+                                            <span>{Deviation.Message}</span>
+                                        </div>
+                                    )
                                 }
                             });
+                        }
+                    })()}
+                    {(() => {
+                        if (this.state.FerryRoute !== null) {
                             if (this.state.FerryRoute.Type.Id === 2) {
                                 return <HarborFilter Harbors={this.state.FerryRoute.Harbor}
                                                      changeHarbor={this.changeHarbor.bind(this)}/>
                             }
                         }
-
                     })()}
                     { this.state.Departures.length > 0 ?
                     <ul className={"Departures"}>
