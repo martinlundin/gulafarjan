@@ -4658,6 +4658,10 @@ readers do not read off random characters that represent icons */
         color: white; }
         .App header .searchResults li:last-child {
           border-bottom: 1px solid transparent; }
+      .App header .searchResults .noResults {
+        text-align: center;
+        padding: 30px 15px;
+        font-size: 14px; }
   .App main {
     display: flex;
     flex-direction: column;

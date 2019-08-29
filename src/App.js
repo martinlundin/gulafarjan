@@ -32,6 +32,7 @@ class App extends Component {
             return response
         }).catch(error => {
             toast.error("Could not contact server");
+            console(error)
             throw error.response.data.RESPONSE.RESULT[0].ERROR.MESSAGE
         });
     };
@@ -267,13 +268,20 @@ class App extends Component {
                             autoComplete={"off"}
                         />
                         <ul className={"searchResults"}>
-                            {this.state.FerryRoutesResults.map((FerryRoutesResult) => (
+                            {this.state.FerryRoutesResults.length !== 0 ?
+
+                                this.state.FerryRoutesResults.map((FerryRoutesResult) => (
                                 <li key={FerryRoutesResult.Id} onClick={() => {
                                     this.chooseFerryRoute(FerryRoutesResult)
                                 }}>
                                     {FerryRoutesResult.Name}
                                 </li>
-                            ))}
+                            )) :
+                                this.state.search !== "" && this.state.FerryRoute === null ?
+                                    <li className={"noResults"}>Vi hittade inga färjor med det namnet</li>
+                                    :
+                                    null
+                            }
                         </ul>
                     </div>
                 </header>
@@ -281,9 +289,6 @@ class App extends Component {
                     {(() => {
                         if (this.state.FerryRoute !== null) {
                             return this.state.Deviations.map((Deviation) => {
-                                console.log(Deviation.Id);
-                                console.log(this.state.FerryRoute.DeviationId);
-                                console.log(Deviation);
                                 if (Deviation.Id === this.state.FerryRoute.DeviationId) {
                                     return (
                                         <div className={`Deviation`}>
