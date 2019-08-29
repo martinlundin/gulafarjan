@@ -90,6 +90,11 @@ $yellow: #fce055;
       justify-content: center;
       text-align: center;
       padding:15px;
+        .fa-ship{
+          font-size:50px;
+          color:$yellow;
+          padding:10px;
+        }
     }
     .HarborFilter{
       display: flex;

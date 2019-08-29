@@ -4673,6 +4673,10 @@ readers do not read off random characters that represent icons */
       justify-content: center;
       text-align: center;
       padding: 15px; }
+      .App main #home .fa-ship {
+        font-size: 50px;
+        color: #fce055;
+        padding: 10px; }
     .App main .HarborFilter {
       display: flex;
       align-items: center;

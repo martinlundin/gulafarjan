@@ -353,8 +353,9 @@ class App extends Component {
                     : null }
 
                     <div id={"home"}>
-                        Hitta avgångar för vägverkets bilfärjor.<br/>
-                        Sök genom i rutan efter färjeled eller hamn.
+                        <i className="fas fa-ship"></i>
+                        Hitta avgångar för de gula färjorna (Vägverkets bilfärjor)<br/><br/>
+                        Sök i rutan efter färjeled eller hamn
                     </div>
                 </main>
                 </div>
