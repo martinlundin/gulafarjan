@@ -264,7 +264,7 @@ class App extends Component {
                                 </li>
                             )) :
                                 this.state.search !== "" && this.state.FerryRoute === null ?
-                                    <li className={"noResults"}>Vi hittade inga färjor med det namnet</li>
+                                    <li className={"noResults"}><i className="fa fa-frown"></i> <br/>Vi hittade inga färjor med det namnet</li>
                                     :
                                     null
                             }
@@ -289,7 +289,7 @@ class App extends Component {
                         }
                     })()}
                     { this.state.Departures.length > 0 ?
-                    <ul className={"Departures"}>
+                    <ul className={"Departures box"}>
                         <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
                         {this.state.Departures.map((Departure) => {
                             if(this.state.filter.hasOwnProperty("FromHarbor")){

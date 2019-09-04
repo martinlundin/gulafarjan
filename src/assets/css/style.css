@@ -4618,6 +4618,26 @@ readers do not read off random characters that represent icons */
     margin: 0 auto;
     display: flex;
     flex-direction: column; }
+  .App #home {
+    position: relative;
+    color: #333333; }
+    .App #home h1 {
+      margin: 0; }
+    .App #home h2 {
+      margin: 5px 0;
+      font-weight: normal;
+      font-size: 22px; }
+    .App #home .logo {
+      width: 200px;
+      margin: 0 auto; }
+    .App #home .searchHelp {
+      position: absolute;
+      z-index: -1;
+      top: 10px;
+      left: 30px;
+      opacity: 0.2; }
+      .App #home .searchHelp .arrow {
+        max-width: 70vw; }
   .App.searched #home {
     display: none; }
   .App header {
@@ -4652,20 +4672,29 @@ readers do not read off random characters that represent icons */
       font-weight: 500;
       cursor: pointer; }
       .App header .searchResults li {
-        padding: 10px 15px;
+        padding: 15px;
         font-size: 18px;
-        border-bottom: 1px solid #333333;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.5);
         color: white; }
         .App header .searchResults li:last-child {
           border-bottom: 1px solid transparent; }
       .App header .searchResults .noResults {
+        background: white;
+        color: #333333;
         text-align: center;
         padding: 30px 15px;
-        font-size: 14px; }
+        font-size: 16px;
+        border-bottom: 0 !important; }
+        .App header .searchResults .noResults .fa {
+          font-size: 30px;
+          margin-bottom: 10px; }
   .App main {
     display: flex;
     flex-direction: column;
     flex: 1; }
+    .App main .box {
+      margin: 5px;
+      box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); }
     .App main #home {
       display: flex;
       flex-direction: column;
@@ -4675,14 +4704,15 @@ readers do not read off random characters that represent icons */
       padding: 15px; }
       .App main #home .fa-ship {
         font-size: 50px;
-        color: #fce055;
+        color: #feda4a;
         padding: 10px; }
     .App main .HarborFilter {
       display: flex;
       align-items: center;
       justify-content: space-around;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent; }
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: 4px; }
       .App main .HarborFilter span {
         padding: 15px;
         text-align: center;
@@ -4704,7 +4734,6 @@ readers do not read off random characters that represent icons */
       margin: 5px;
       background: #eee; }
     .App main .Departures {
-      margin: 0;
       padding: 0;
       list-style: none; }
       .App main .Departures .FerryRouteName {
@@ -4721,20 +4750,24 @@ readers do not read off random characters that represent icons */
         justify-content: space-between; }
         .App main .Departures li:last-child {
           border-bottom: 1px solid transparent; }
+        .App main .Departures li .ferryDepartureInfo {
+          display: flex;
+          align-items: center; }
         .App main .Departures li .ferryIcon {
-          background: black;
+          background: #feda4a;
           display: inline-block;
-          font-size: 20px;
-          line-height: 30px;
-          width: 40px;
-          height: 40px;
-          padding: 5px;
+          width: 30px;
+          height: 30px;
+          padding: 7px;
           text-align: center;
-          border-radius: 100px;
-          color: #fce055; }
+          border-radius: 100px; }
+          .App main .Departures li .ferryIcon img {
+            max-width: 100%;
+            filter: grayscale(100%) brightness(0);
+            opacity: 0.6; }
         .App main .Departures li .ferryFromTo {
-          padding: 0 15px;
-          font-size: 15px; }
+          padding: 0 10px;
+          font-size: 12px; }
           .App main .Departures li .ferryFromTo i {
             font-size: 0.6em;
             display: inline-block;

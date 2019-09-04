@@ -13,7 +13,7 @@ class HarborFilter extends React.Component {
 
     render() {
         return (
-            <div className={`HarborFilter`}>
+            <div className={`HarborFilter box`}>
                 {this.props.Harbors.map((Harbor) => (
 
                     <span key={Harbor.Id} className={this.state.active === Harbor.Name ? "active" : ""}

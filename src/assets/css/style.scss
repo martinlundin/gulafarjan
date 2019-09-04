@@ -4,7 +4,7 @@ $fa-font-path: "../webfonts";
 @import "../fonts/fontawesome/scss/solid.scss";
 $dark: #333333;
 $grey: #c8c8c8;
-$yellow: #fce055;
+$yellow: #feda4a;
 
 
 * {
@@ -23,6 +23,32 @@ $yellow: #fce055;
     margin:0 auto;
     display: flex;
     flex-direction: column;
+  }
+  #home{
+    position:relative;
+    color: $dark;
+    h1{
+      margin:0;
+    }
+    h2{
+      margin:5px 0;
+      font-weight: normal;
+      font-size:22px;
+    }
+    .logo{
+      width: 200px;
+      margin: 0 auto;
+    }
+    .searchHelp{
+      position:absolute;
+      z-index: -1;
+      top: 10px;
+      left: 30px;
+      opacity: 0.2;
+      .arrow{
+        max-width: 70vw;
+      }
+    }
   }
   &.searched{
     #home{
@@ -64,18 +90,25 @@ $yellow: #fce055;
       font-weight: 500;
       cursor: pointer;
       li {
-        padding: 10px 15px;
+        padding: 15px;
         font-size:18px;
-        border-bottom: 1px solid $dark;
+        border-bottom: 1px solid rgba($dark, 0.5);
         color:white;
         &:last-child {
           border-bottom: 1px solid transparent;
         }
       }
       .noResults{
+        background:white;
+        color:$dark;
         text-align: center;
         padding: 30px 15px;
-        font-size: 14px;
+        font-size: 16px;
+        border-bottom:0!important;
+        .fa{
+          font-size: 30px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
@@ -83,6 +116,10 @@ $yellow: #fce055;
     display:flex;
     flex-direction: column;
     flex:1;
+    .box{
+      margin:5px;
+      box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.35);
+    }
     #home{
       display:flex;
       flex-direction: column;
@@ -102,6 +139,7 @@ $yellow: #fce055;
       justify-content: space-around;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      padding-bottom:4px;
       span{
         padding:15px;
         text-align:center;
@@ -128,7 +166,6 @@ $yellow: #fce055;
       background: #eee;
     }
     .Departures{
-      margin: 0;
       padding: 0;
       list-style: none;
       .FerryRouteName{
@@ -147,21 +184,27 @@ $yellow: #fce055;
         &:last-child {
           border-bottom: 1px solid transparent;
         }
+        .ferryDepartureInfo{
+          display:flex;
+          align-items:center;
+        }
         .ferryIcon{
-          background: black;
+          background: $yellow;
           display: inline-block;
-          font-size: 20px;
-          line-height: 30px;
-          width: 40px;
-          height: 40px;
-          padding: 5px;
+          width: 30px;
+          height: 30px;
+          padding:7px;
           text-align: center;
           border-radius: 100px;
-          color: #fce055;
+          img{
+            max-width:100%;
+            filter: grayscale(100%) brightness(0);
+            opacity:0.6;
+          }
         }
         .ferryFromTo{
-          padding: 0 15px;
-          font-size: 15px;
+          padding: 0 10px;
+          font-size: 12px;
           i{
             font-size: 0.6em;
             display: inline-block;

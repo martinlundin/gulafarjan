@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from "moment/moment";
 import 'moment/locale/sv'
+import ferry from './../assets/img/gulafarjan.png'
 
 class DepartureComponent extends React.Component {
     constructor(props) {
@@ -34,18 +35,18 @@ class DepartureComponent extends React.Component {
     render() {
         return (
             <li>
-                <span>
-                    <span className={"ferryIcon"}><i className="fas fa-ship"></i></span>
+                <div className={"ferryDepartureInfo"}>
+                    <span className={"ferryIcon"}><img src={ferry} alt={"Gula färjan ikon"}/></span>
                     <span className={"ferryFromTo"}>
                         <span className={"ferryFrom"}>{this.state.Departure.FromHarbor.Name}</span>
                         <i className="fas fa-arrow-right"></i>
                         <span className={"ferryTo"}>{this.state.Departure.ToHarbor.Name}</span>
                     </span>
-                </span>
-                <span className={"ferryDepartureDateTime"}>
+                </div>
+                <div className={"ferryDepartureDateTime"}>
                     <span className={"time"}>{this.renderTime(this.state.Departure.DepartureTime)}</span>
                     <span className={"date"}>{this.renderDate(this.state.Departure.DepartureTime)}</span>
-                </span>
+                </div>
             </li>
         )
     }
