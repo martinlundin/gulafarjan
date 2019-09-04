@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import axios from "axios"
 import './assets/css/style.scss';
+import Home from './components/Home'
 import HarborFilter from './components/HarborFilter'
+import DepartureComponent from './components/Departure'
+import DeviationComponent from './components/Deviation'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import moment from 'moment'
-import 'moment/locale/sv'
 
 class App extends Component {
 
@@ -196,27 +197,6 @@ class App extends Component {
         this.setState({filter});
     };
 
-    renderDate = (time) => {
-        if(moment(time).format('LL') !== moment().format('LL')) {
-            return moment(time).format('LL');
-        }
-    };
-
-    renderTime = (time) => {
-        let unixTimestamp = moment(time).unix();
-        let currentUnixTimestamp = moment().unix();
-        let diff = unixTimestamp - currentUnixTimestamp;
-
-        //Diff is passed (1 minute margin by default) or less than 1 minute
-        if (diff <= 60) {
-            return "Nu"
-        } else if (diff <= 3600) {
-            return Math.ceil(diff / 60) + "min"
-        }  else {
-            return moment(time).format('LT');
-        }
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -296,11 +276,7 @@ class App extends Component {
                         if (this.state.FerryRoute !== null) {
                             return this.state.Deviations.map((Deviation) => {
                                 if (Deviation.Id === this.state.FerryRoute.DeviationId) {
-                                    return (
-                                        <div className={`Deviation`}>
-                                            <span>{Deviation.Message}</span>
-                                        </div>
-                                    )
+                                    return <DeviationComponent Deviation={Deviation}/>
                                 }
                             });
                         }
@@ -308,61 +284,26 @@ class App extends Component {
                     {(() => {
                         if (this.state.FerryRoute !== null) {
                             if (this.state.FerryRoute.Type.Id === 2) {
-                                return <HarborFilter Harbors={this.state.FerryRoute.Harbor}
-                                                     changeHarbor={this.changeHarbor.bind(this)}/>
+                                return <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/>
                             }
                         }
                     })()}
                     { this.state.Departures.length > 0 ?
                     <ul className={"Departures"}>
-                    <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
+                        <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
                         {this.state.Departures.map((Departure) => {
                             if(this.state.filter.hasOwnProperty("FromHarbor")){
                                 if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
-                                    return (
-                                        <li key={Departure.Id}>
-                                            <span>
-                                                <span className={"ferryIcon"}><i className="fas fa-ship"></i></span>
-                                                <span className={"ferryFromTo"}>
-                                                    <span className={"ferryFrom"}>{Departure.FromHarbor.Name}</span>
-                                                    <i className="fas fa-arrow-right"></i>
-                                                    <span className={"ferryTo"}>{Departure.ToHarbor.Name}</span>
-                                                </span>
-                                            </span>
-                                            <span className={"ferryDepartureDateTime"}>
-                                                <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
-                                                <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
-                                            </span>
-                                        </li>
-                                    )
+                                    return <DepartureComponent key={Departure.Id} Departure={Departure}/>
                                 }
                             }else{
-                                return (
-                                    <li key={Departure.Id}>
-                                        <span>
-                                            <span className={"ferryIcon"}><i className="fas fa-ship"></i></span>
-                                            <span className={"ferryFromTo"}>
-                                                <span className={"ferryFrom"}>{Departure.FromHarbor.Name}</span>
-                                                <i className="fas fa-arrow-right"></i>
-                                                <span className={"ferryTo"}>{Departure.ToHarbor.Name}</span>
-                                            </span>
-                                        </span>
-                                        <span className={"ferryDepartureDateTime"}>
-                                            <span className={"time"}>{this.renderTime(Departure.DepartureTime)}</span>
-                                            <span className={"date"}>{this.renderDate(Departure.DepartureTime)}</span>
-                                        </span>
-                                    </li>
-                                )
+                                return <DepartureComponent key={Departure.Id} Departure={Departure}/>
                             }
                         })}
                     </ul>
                     : null }
 
-                    <div id={"home"}>
-                        <i className="fas fa-ship"></i>
-                        Hitta avgångar för de gula färjorna (Vägverkets bilfärjor)<br/><br/>
-                        Sök i rutan efter färjeled eller hamn
-                    </div>
+                    <Home/>
                 </main>
                 </div>
             </div>
