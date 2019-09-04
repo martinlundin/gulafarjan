@@ -4612,13 +4612,16 @@ readers do not read off random characters that represent icons */
 
 .App {
   min-height: 100vh;
-  font-family: "PT Sans", sans-serif; }
+  font-family: "PT Sans", sans-serif;
+  background: #f0f8ff; }
   .App .contentWrapper {
     min-height: 100vh;
-    max-width: 600px;
+    max-width: 768px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 3px 2px; }
   .App #home {
     position: relative;
     color: #333333; }
