@@ -234,8 +234,19 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.getFerryRoutes().then(FerryRoutes => {
+        //If localstorage exist set those routes until we get response with new ones
+        if(localStorage.getItem("FerryRoutes")){
+            let FerryRoutes = JSON.parse(localStorage.getItem("FerryRoutes"));
             this.setState({FerryRoutes});
+        }
+        this.getFerryRoutes().then(FerryRoutes => {
+            //If localstorage is set choose that route
+            if(localStorage.getItem("FerryRoute")){
+                this.chooseFerryRoute(JSON.parse(localStorage.getItem("FerryRoute")))
+            }
+
+            this.setState({FerryRoutes});
+            localStorage.setItem("FerryRoutes", JSON.stringify(FerryRoutes));
 
             //Get Deviations for all the FerryRoutes
             this.getDeviations(FerryRoutes.map(Route => {
@@ -243,11 +254,6 @@ class App extends Component {
             })).then(Deviations => {
                 this.setState({Deviations});
                 });
-
-            //If localstorage is set choose that route
-            if(localStorage.getItem("FerryRoute")){
-                this.chooseFerryRoute(JSON.parse(localStorage.getItem("FerryRoute")))
-            }
         });
     }
 
