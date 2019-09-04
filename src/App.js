@@ -32,9 +32,11 @@ class App extends Component {
         }).then(response => {
             return response
         }).catch(error => {
-            toast.error("Could not contact server");
             console.log(error)
-            throw error.response.data.RESPONSE.RESULT[0].ERROR.MESSAGE
+            if (error.response) {
+                toast.error("Could not contact server");
+                throw error.response.data.RESPONSE.RESULT[0].ERROR.MESSAGE
+            }
         });
     };
 
