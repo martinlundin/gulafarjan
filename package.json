@@ -1,12 +1,15 @@
 {
   "name": "farjan",
-  "version": "0.1.0",
+  "version": "1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "@google/markerclusterer": "^1.0.3",
+    "axios": "^0.18.1",
+    "google-maps-react": "^2.0.2",
     "moment": "^2.24.0",
     "node-sass-chokidar": "^1.3.4",
     "npm-run-all": "^4.1.5",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-scripts": "3.1.1",

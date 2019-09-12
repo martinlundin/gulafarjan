@@ -5,15 +5,13 @@ import Home from './components/Home'
 import HarborFilter from './components/HarborFilter'
 import DepartureComponent from './components/Departure'
 import DeviationComponent from './components/Deviation'
+import MapComponent from './components/Map'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
 
-    /**
-     * Api documentation: http://api.trafikinfo.trafikverket.se/API/TheRequest
-     */
-
+    /** Api documentation: http://api.trafikinfo.trafikverket.se/API/TheRequest **/
     api = (query) => {
         return axios({
             method: "post",
@@ -153,44 +151,60 @@ class App extends Component {
         return 0;
     };
 
-    searchChangeHandler = (event) => {
-        window.scrollTo(0, 0);
+    inputSearchHandler = (event) => {
+        this.search(event.target.value);
+    };
+
+    search = (value) => {
         this.setState({
-            search: event.target.value,
-            filter: {},
-            Departures: [],
-            FerryRoute: null,
-            FerryRoutesResults: this.filterFerryRoutes(event.target.value).sort((a,b) => {
-                    return this.sortRelevance(a,b,event.target.value)
-                }).slice(0, 8)
+            search: value,
+            FerryRoutesResults: this.filterFerryRoutes(value).sort((a,b) => {
+                return this.sortRelevance(a,b,value)
+            })
         });
-        clearInterval(this.state.Interval);
-        //Remove FerryRoute from localstorage
-        localStorage.setItem("FerryRoute", null);
+        this.closeChosenFerryRoute()
     };
 
     chooseFerryRoute = (FerryRoute) => {
         if(FerryRoute !== null){
-            //Set search states
-            this.setState({
-                search: FerryRoute.Name,
-                FerryRoute: FerryRoute,
-                FerryRoutesResults: [],
-            });
-            //Get departures and set its state
-            this.getDepartures(FerryRoute.Id).then(Departures => {
-                this.setState({Departures});
+            //Make sure to clear previous chosen route
+            this.closeChosenFerryRoute().then(r => {
+                //Set search states
                 this.setState({
-                    Interval: setInterval(() => {
-                        this.getDepartures(FerryRoute.Id).then(Departures => {
-                            this.setState({Departures});
-                        });
-                    },30000)
-                })
+                    search: FerryRoute.Name,
+                    FerryRoute: FerryRoute,
+                    FerryRoutesResults: [],
+                });
+                //Get departures and set its state
+                this.getDepartures(FerryRoute.Id).then(Departures => {
+                    this.setState({Departures});
+                    this.setState({
+                        Interval: setInterval(() => {
+                            this.getDepartures(FerryRoute.Id).then(Departures => {
+                                this.setState({Departures});
+                            });
+                        },30000)
+                    })
+                });
+                //Set local storage for next time site is opened
+                localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
             });
-            //Set local storage for next time site is opened
-            localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
         }
+    };
+
+    closeChosenFerryRoute = () => {
+        let othis = this;
+        return new Promise(function(resolve, reject) {
+            othis.setState({
+                filter: {},
+                Departures: [],
+                FerryRoute: null,
+            });
+            clearInterval(othis.state.Interval);
+            //Remove FerryRoute from localstorage
+            localStorage.setItem("FerryRoute", null);
+            resolve(true)
+        });
     };
 
     changeHarbor = (Name) => {
@@ -223,7 +237,7 @@ class App extends Component {
         }
         this.getFerryRoutes().then(FerryRoutes => {
             //If localstorage is set choose that route
-            if(localStorage.getItem("FerryRoute")){
+            if(localStorage.getItem("FerryRoute") !== null){
                 this.chooseFerryRoute(JSON.parse(localStorage.getItem("FerryRoute")))
             }
 
@@ -241,73 +255,81 @@ class App extends Component {
 
     render() {
         return (
-
             <div className={`App ${this.state.search ? "searched" : ""}`}>
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
-                <div className={"contentWrapper"}>
-                <header>
-                    <div id={"searchWrap"}>
+                <header id={"header"}>
+                    <div id={"searchBar"}>
                         <input
-                            onChange={this.searchChangeHandler}
+                            onChange={this.inputSearchHandler}
                             value={this.state.search}
-                            className={"searchInput"}
+                            className={"box"}
                             name={"search"}
                             placeholder={"Sök färja"}
                             autoComplete={"off"}
                         />
-                        <ul className={"searchResults"}>
-                            {this.state.FerryRoutesResults.length !== 0 ?
-
-                                this.state.FerryRoutesResults.map((FerryRoutesResult) => (
-                                <li key={FerryRoutesResult.Id} onClick={() => {
-                                    this.chooseFerryRoute(FerryRoutesResult)
-                                }}>
+                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"></i></span> : null}
+                    </div>
+                    <ul id={"searchResults"} className={"box"}>
+                        {this.state.FerryRoutesResults.length !== 0 ?
+                            this.state.FerryRoutesResults.map((FerryRoutesResult) => (
+                                <li key={FerryRoutesResult.Id} onClick={() => {this.chooseFerryRoute(FerryRoutesResult)}}>
                                     {FerryRoutesResult.Name}
                                 </li>
-                            )) :
-                                this.state.search !== "" && this.state.FerryRoute === null ?
-                                    <li className={"noResults"}><i className="fa fa-frown"></i> <br/>Vi hittade inga färjor med det namnet</li>
-                                    :
-                                    null
-                            }
-                        </ul>
-                    </div>
+                            ))
+                            :
+                            this.state.search !== "" && this.state.FerryRoute === null ?
+                                <li className={"noResult"}><i className="fa fa-frown"></i> <br/>Vi hittade inga färjor med det namnet</li>
+                                :
+                                null
+                        }
+                    </ul>
                 </header>
-                <main>
-                    {(() => {
-                        if (this.state.FerryRoute !== null) {
-                            return this.state.Deviations.map((Deviation) => {
-                                if (Deviation.Id === this.state.FerryRoute.DeviationId) {
-                                    return <DeviationComponent Deviation={Deviation}/>
-                                }
-                            });
-                        }
-                    })()}
-                    {(() => {
-                        if (this.state.FerryRoute !== null) {
-                            if (this.state.FerryRoute.Type.Id === 2) {
-                                return <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/>
+                <main id={"main"}>
+                    <div className={"ChosenFerryRoute"}>
+                        {(() => {
+                            if (this.state.FerryRoute !== null) {
+                                return this.state.Deviations.map((Deviation) => {
+                                    if (Deviation.Id === this.state.FerryRoute.DeviationId) {
+                                        return <DeviationComponent key={Deviation.Message} Deviation={Deviation}/>
+                                    }
+                                });
                             }
-                        }
-                    })()}
-                    { this.state.Departures.length > 0 ?
-                    <ul className={"Departures box"}>
-                        <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
-                        {this.state.Departures.map((Departure) => {
-                            if(this.state.filter.hasOwnProperty("FromHarbor")){
-                                if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
+                        })()}
+                        {(() => {
+                            if (this.state.FerryRoute !== null) {
+                                if (this.state.FerryRoute.Type.Id === 2) {
+                                    return <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/>
+                                }
+                            }
+                        })()}
+                        { this.state.Departures.length > 0 ?
+                        <ul className={"Departures box"}>
+                            <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
+                            {this.state.Departures.map((Departure) => {
+                                if(this.state.filter.hasOwnProperty("FromHarbor")){
+                                    if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
+                                        return <DepartureComponent key={Departure.Id} Departure={Departure}/>
+                                    }
+                                }else{
                                     return <DepartureComponent key={Departure.Id} Departure={Departure}/>
                                 }
-                            }else{
-                                return <DepartureComponent key={Departure.Id} Departure={Departure}/>
-                            }
-                        })}
-                    </ul>
-                    : null }
-
-                    <Home/>
+                            })}
+                        </ul>
+                        : null }
+                    </div>
                 </main>
-                </div>
+                {this.state.FerryRoutes !== [] ?
+                    <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
+                        <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
+                    </div>
+                :
+                null
+                }
+                {this.state.FerryRoute === null ?
+                    <Home/>
+                    :
+                    null
+                }
             </div>
         );
     }

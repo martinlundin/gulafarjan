@@ -4613,118 +4613,120 @@ readers do not read off random characters that represent icons */
 .App {
   min-height: 100vh;
   font-family: "PT Sans", sans-serif;
-  background: #f0f8ff; }
-  .App .contentWrapper {
-    min-height: 100vh;
-    max-width: 768px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 3px 2px; }
+  background: #333333; }
+  .App .box {
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
+    background: white; }
+  .App .padding {
+    padding: 15px; }
   .App #home {
-    position: relative;
-    color: #333333; }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background: rgba(51, 51, 51, 0.9);
+    color: #feda4a; }
     .App #home h1 {
-      margin: 0; }
+      margin: 0;
+      font-size: 18px; }
     .App #home h2 {
       margin: 5px 0;
       font-weight: normal;
-      font-size: 22px; }
+      font-size: 13px; }
     .App #home .logo {
-      width: 200px;
-      margin: 0 auto; }
-    .App #home .searchHelp {
-      position: absolute;
-      z-index: -1;
-      top: 10px;
-      left: 30px;
-      opacity: 0.2; }
-      .App #home .searchHelp .arrow {
-        max-width: 70vw; }
-  .App.searched #home {
-    display: none; }
-  .App header {
-    width: 100%; }
-    .App header .searchInput {
-      background: #333333;
-      color: white;
-      width: 100%;
-      margin: 0;
-      border: 0;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: 500;
-      border-radius: 0;
-      outline: 0;
-      -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      -webkit-transform: translateY(0%);
-      -moz-transform: translateY(0%);
-      -ms-transform: translateY(0%);
-      -o-transform: translateY(0%);
-      transform: translateY(0%); }
-    .App header #searchWrap {
-      background: rgba(51, 51, 51, 0.9); }
-    .App header .searchResults {
-      margin: 0;
+      max-width: 80px;
+      margin: 0 auto;
+      align-self: center;
+      padding: 5px; }
+  .App #header {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    z-index: 1; }
+    .App #header #searchBar {
+      position: relative; }
+      .App #header #searchBar input {
+        margin-bottom: 0;
+        border: 0;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 500;
+        outline: 0;
+        width: calc(100% - 10px);
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%); }
+        .App #header #searchBar input::placeholder {
+          color: rgba(51, 51, 51, 0.5);
+          opacity: 1; }
+      .App #header #searchBar #resetSearch {
+        color: #333333;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 16px 15px;
+        opacity: 0.7;
+        z-index: 10;
+        margin: 5px; }
+    .App #header #searchResults {
       padding: 0;
       list-style: none;
       font-weight: 500;
-      cursor: pointer; }
-      .App header .searchResults li {
+      cursor: pointer;
+      max-height: 153px;
+      overflow-x: auto;
+      width: calc(100% - 10px); }
+      .App #header #searchResults:empty {
+        margin: 0; }
+      .App #header #searchResults li {
         padding: 15px;
         font-size: 18px;
         border-bottom: 1px solid rgba(51, 51, 51, 0.5);
-        color: white; }
-        .App header .searchResults li:last-child {
+        color: #333333; }
+        .App #header #searchResults li:last-child {
           border-bottom: 1px solid transparent; }
-      .App header .searchResults .noResults {
+      .App #header #searchResults .noResult {
         background: white;
         color: #333333;
         text-align: center;
         padding: 30px 15px;
         font-size: 16px;
         border-bottom: 0 !important; }
-        .App header .searchResults .noResults .fa {
+        .App #header #searchResults .noResult .fa {
           font-size: 30px;
           margin-bottom: 10px; }
-  .App main {
+  .App #main {
     display: flex;
     flex-direction: column;
-    flex: 1; }
-    .App main .box {
-      margin: 5px;
-      box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); }
-    .App main #home {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: center;
-      text-align: center;
-      padding: 15px; }
-      .App main #home .fa-ship {
-        font-size: 50px;
-        color: #feda4a;
-        padding: 10px; }
-    .App main .HarborFilter {
+    flex: 1;
+    position: relative;
+    z-index: 1; }
+    .App #main .HarborFilter {
       display: flex;
       align-items: center;
       justify-content: space-around;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       padding-bottom: 4px; }
-      .App main .HarborFilter span {
+      .App #main .HarborFilter span {
         padding: 15px;
         text-align: center;
         max-width: 50%; }
-      .App main .HarborFilter .active {
+      .App #main .HarborFilter .active {
         font-weight: bold;
         position: relative; }
-        .App main .HarborFilter .active::after {
+        .App #main .HarborFilter .active::after {
           content: "\f0d7";
           font-family: "Font Awesome 5 free";
           position: absolute;
@@ -4732,61 +4734,76 @@ readers do not read off random characters that represent icons */
           left: 0;
           right: 0;
           text-align: center; }
-    .App main .Deviation {
+    .App #main .Deviation {
       border-left: 5px solid #ff4e42;
       padding: 10px;
       margin: 5px;
       background: #eee; }
-    .App main .Departures {
+    .App #main .Departures {
       padding: 0;
       list-style: none; }
-      .App main .Departures .FerryRouteName {
+      .App #main .Departures .FerryRouteName {
         width: 100%;
         text-align: center;
         display: inline-block;
         background: #ececec;
         padding: 5px 0; }
-      .App main .Departures li {
+      .App #main .Departures li {
         padding: 10px 15px;
         border-bottom: 1px solid #c8c8c8;
         display: flex;
         align-items: center;
         justify-content: space-between; }
-        .App main .Departures li:last-child {
+        .App #main .Departures li:last-child {
           border-bottom: 1px solid transparent; }
-        .App main .Departures li .ferryDepartureInfo {
+        .App #main .Departures li .ferryDepartureInfo {
           display: flex;
           align-items: center; }
-        .App main .Departures li .ferryIcon {
-          background: #feda4a;
+        .App #main .Departures li .ferryIcon {
+          background: #333333;
           display: inline-block;
           width: 30px;
           height: 30px;
-          padding: 7px;
+          padding: 5px;
           text-align: center;
           border-radius: 100px; }
-          .App main .Departures li .ferryIcon img {
-            max-width: 100%;
-            filter: grayscale(100%) brightness(0);
-            opacity: 0.6; }
-        .App main .Departures li .ferryFromTo {
+          .App #main .Departures li .ferryIcon img {
+            max-width: 100%; }
+        .App #main .Departures li .ferryFromTo {
           padding: 0 10px;
           font-size: 12px; }
-          .App main .Departures li .ferryFromTo i {
+          .App #main .Departures li .ferryFromTo i {
             font-size: 0.6em;
             display: inline-block;
             padding: 5px;
             vertical-align: text-top; }
-        .App main .Departures li .ferryDepartureDateTime {
+        .App #main .Departures li .ferryDepartureDateTime {
           text-align: right;
           position: relative; }
-          .App main .Departures li .ferryDepartureDateTime .time, .App main .Departures li .ferryDepartureDateTime .date {
+          .App #main .Departures li .ferryDepartureDateTime .time, .App #main .Departures li .ferryDepartureDateTime .date {
             display: block; }
-          .App main .Departures li .ferryDepartureDateTime .time {
+          .App #main .Departures li .ferryDepartureDateTime .time {
             font-weight: bold;
             font-size: 24px; }
-          .App main .Departures li .ferryDepartureDateTime .date {
+          .App #main .Departures li .ferryDepartureDateTime .date {
             font-size: 11px;
             position: absolute;
             right: 0;
             white-space: nowrap; }
+  .App .Map {
+    position: fixed;
+    top: -25px;
+    left: -25px;
+    bottom: -25px;
+    right: -25px;
+    z-index: 0;
+    transition: filter 0.8s ease-in-out; }
+    .App .Map .gm-style {
+      background: #333333; }
+    .App .Map.blur {
+      filter: blur(5px); }
+
+@media screen and (min-width: 768px) {
+  .App #header, .App #main {
+    max-width: 380px;
+    margin: 0 auto; } }

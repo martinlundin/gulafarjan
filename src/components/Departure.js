@@ -36,7 +36,7 @@ class DepartureComponent extends React.Component {
         return (
             <li>
                 <div className={"ferryDepartureInfo"}>
-                    <span className={"ferryIcon"}><img src={ferry} alt={"Gula färjan ikon"}/></span>
+                    <span className={"ferryIcon"}><img src={ferry} alt={"Gulafärjan ikon"}/></span>
                     <span className={"ferryFromTo"}>
                         <span className={"ferryFrom"}>{this.state.Departure.FromHarbor.Name}</span>
                         <i className="fas fa-arrow-right"></i>

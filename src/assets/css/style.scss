@@ -17,91 +17,108 @@ $yellow: #feda4a;
 .App {
   min-height:100vh;
   font-family: "PT Sans", sans-serif;
-  background:#f0f8ff;
-  .contentWrapper {
-    min-height:100vh;
-    max-width:768px;
-    margin:0 auto;
-    display: flex;
-    flex-direction: column;
+  background:$dark;
+  .box{
+    margin:5px;
+    border-radius:5px;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.35);
     background:white;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 3px 2px;
   }
+  .padding{
+    padding:15px;
+  }
+
   #home{
-    position:relative;
-    color: $dark;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display:flex;
+    background:rgba($dark,0.9 );
+    color:$yellow;
+
     h1{
       margin:0;
+      font-size:18px;
     }
     h2{
       margin:5px 0;
       font-weight: normal;
-      font-size:22px;
+      font-size:13px;
     }
     .logo{
-      width: 200px;
+      max-width: 80px;
       margin: 0 auto;
-    }
-    .searchHelp{
-      position:absolute;
-      z-index: -1;
-      top: 10px;
-      left: 30px;
-      opacity: 0.2;
-      .arrow{
-        max-width: 70vw;
-      }
-    }
-  }
-  &.searched{
-    #home{
-      display:none;
+      align-self: center;
+      padding:5px;
     }
   }
 
-  header {
-    width: 100%;
-    .searchInput {
-      background: $dark;
-      color:white;
-      width: 100%;
-      margin: 0;
-      border: 0;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: 500;
-      border-radius: 0;
-      outline: 0;
-      -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      -webkit-transform: translateY(0%);
-      -moz-transform: translateY(0%);
-      -ms-transform: translateY(0%);
-      -o-transform: translateY(0%);
-      transform: translateY(0%);
+  #header {
+    display:flex;
+    flex-direction: column;
+    flex:1;
+    position:relative;
+    z-index:1;
+
+    #searchBar {
+      position:relative;
+      input{
+        margin-bottom:0;
+        border: 0;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 500;
+        outline: 0;
+        width: calc(100% - 10px);
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
+        &::placeholder {
+          color: rgba($dark, 0.5);
+          opacity: 1;
+        }
+      }
+      #resetSearch{
+        color:$dark;
+        position:absolute;
+        top: 0;
+        right: 0;
+        padding: 16px 15px;
+        opacity: 0.7;
+        z-index:10;
+        margin:5px;
+      }
     }
-    #searchWrap{
-      background:rgba($dark,0.9);
-    }
-    .searchResults {
-      margin: 0;
+
+    #searchResults {
       padding: 0;
       list-style: none;
       font-weight: 500;
       cursor: pointer;
+      max-height: 153px;
+      overflow-x: auto;
+      width: calc(100% - 10px);
+      &:empty{
+        margin:0;
+      }
       li {
         padding: 15px;
         font-size:18px;
         border-bottom: 1px solid rgba($dark, 0.5);
-        color:white;
+        color:$dark;
         &:last-child {
           border-bottom: 1px solid transparent;
         }
       }
-      .noResults{
+      .noResult{
         background:white;
         color:$dark;
         text-align: center;
@@ -115,27 +132,14 @@ $yellow: #feda4a;
       }
     }
   }
-  main{
+
+  #main{
     display:flex;
     flex-direction: column;
     flex:1;
-    .box{
-      margin:5px;
-      box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.35);
-    }
-    #home{
-      display:flex;
-      flex-direction: column;
-      flex:1;
-      justify-content: center;
-      text-align: center;
-      padding:15px;
-        .fa-ship{
-          font-size:50px;
-          color:$yellow;
-          padding:10px;
-        }
-    }
+    position:relative;
+    z-index:1;
+
     .HarborFilter{
       display: flex;
       align-items: center;
@@ -162,12 +166,14 @@ $yellow: #feda4a;
         }
       }
     }
+
     .Deviation{
       border-left: 5px solid #ff4e42;
       padding: 10px;
       margin: 5px;
       background: #eee;
     }
+
     .Departures{
       padding: 0;
       list-style: none;
@@ -192,17 +198,15 @@ $yellow: #feda4a;
           align-items:center;
         }
         .ferryIcon{
-          background: $yellow;
+          background: $dark;
           display: inline-block;
           width: 30px;
           height: 30px;
-          padding:7px;
+          padding:5px;
           text-align: center;
           border-radius: 100px;
           img{
             max-width:100%;
-            filter: grayscale(100%) brightness(0);
-            opacity:0.6;
           }
         }
         .ferryFromTo{
@@ -234,6 +238,34 @@ $yellow: #feda4a;
         }
 
       }
+    }
+
+  }
+
+  .Map{
+    position: fixed;
+    top: -25px;
+    left: -25px;
+    bottom: -25px;
+    right: -25px;
+    z-index: 0;
+    transition:filter 0.8s ease-in-out;
+    .gm-style{
+      background: $dark;
+    }
+    &.blur{
+      filter: blur(5px);
+    }
+  }
+
+}
+
+@media screen and (min-width: 768px){
+
+  .App {
+    #header, #main {
+      max-width:380px;
+      margin:0 auto;
     }
   }
 }

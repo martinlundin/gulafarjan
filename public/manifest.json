@@ -1,6 +1,6 @@
 {
-  "short_name": "Gula Färjan",
-  "name": "Gula Färjan",
+  "short_name": "Gulafärjan",
+  "name": "Gulafärjan",
   "icons": [
     {
       "src": "favicon.png",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#333333",
+  "background_color": "#333333"
 }
