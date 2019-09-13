@@ -32,11 +32,13 @@ $yellow: #feda4a;
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    right:0;
     display:flex;
     background:rgba($dark,0.9 );
     color:$yellow;
-
+    width:calc(100% - 10px);
+    margin:5px auto;
+    max-width:380px;
     h1{
       margin:0;
       font-size:18px;
