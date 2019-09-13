@@ -318,13 +318,9 @@ class App extends Component {
                         : null }
                     </div>
                 </main>
-                {this.state.FerryRoutes !== [] ?
-                    <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
-                        <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
-                    </div>
-                :
-                null
-                }
+                <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
+                    <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
+                </div>
                 {this.state.FerryRoute === null ?
                     <Home/>
                     :

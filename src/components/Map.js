@@ -46,6 +46,10 @@ export class MapComponent extends Component {
     };
 
     componentDidUpdate(prevProps){
+        //Update on initial launch
+        if(prevProps.FerryRoutes.length === 0 && this.props.FerryRoutes.length > 0){
+            this.setState({avalibleFerryRoutes: this.props.FerryRoutes}, () => {this.updateMapBounds()})
+        }
         if(this.props.FerryRoute === null){
             if(prevProps.FerryRoutesResults !== this.props.FerryRoutesResults){
                 if(this.props.FerryRoutesResults.length > 0){
