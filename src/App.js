@@ -268,6 +268,7 @@ class App extends Component {
                             className={"box"}
                             name={"search"}
                             placeholder={"Sök färja"}
+                            aria-label={"Sök färja"}
                             autoComplete={"off"}
                         />
                         {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"></i></span> : null}
