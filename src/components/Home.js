@@ -10,6 +10,7 @@ class Home extends React.Component {
                     <h1>Gulafärjan</h1>
                     <h2>Hitta avgångar för de gula färjorna<br/>(Vägverkets bilfärjor)</h2>
                 </div>
+                <div id={"pwaInstall"}>Installera</div>
             </div>
         )
     }

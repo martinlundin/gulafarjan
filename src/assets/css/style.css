@@ -4621,6 +4621,8 @@ readers do not read off random characters that represent icons */
     background: white; }
   .App .padding {
     padding: 15px; }
+  .App #pwaInstall {
+    display: none; }
   .App #home {
     position: absolute;
     bottom: 0;
@@ -4744,7 +4746,8 @@ readers do not read off random characters that represent icons */
       background: #eee; }
     .App #main .Departures {
       padding: 0;
-      list-style: none; }
+      list-style: none;
+      overflow: auto; }
       .App #main .Departures .FerryRouteName {
         width: 100%;
         text-align: center;

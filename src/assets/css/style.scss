@@ -28,6 +28,10 @@ $yellow: #feda4a;
     padding:15px;
   }
 
+  #pwaInstall{
+    display:none;
+  }
+
   #home{
     position: absolute;
     bottom: 0;
@@ -179,6 +183,7 @@ $yellow: #feda4a;
     .Departures{
       padding: 0;
       list-style: none;
+      overflow:auto;
       .FerryRouteName{
         width: 100%;
         text-align: center;
