@@ -4604,6 +4604,18 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.spin {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
 * {
   box-sizing: border-box; }
 
@@ -4769,7 +4781,14 @@ readers do not read off random characters that represent icons */
         text-align: center;
         display: inline-block;
         background: #ececec;
-        padding: 5px 0; }
+        padding: 5px 0;
+        position: relative; }
+        .App #main .Departures .FerryRouteName i {
+          padding: 6px 10px;
+          position: absolute;
+          top: 0;
+          right: 0;
+          cursor: pointer; }
       .App #main .Departures li {
         padding: 10px 15px;
         border-bottom: 1px solid #c8c8c8;

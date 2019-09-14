@@ -271,7 +271,7 @@ class App extends Component {
                             aria-label={"Sök färja"}
                             autoComplete={"off"}
                         />
-                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"></i></span> : null}
+                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"/></span> : null}
                     </div>
                     <ul id={"searchResults"} className={"box"}>
                         {this.state.FerryRoutesResults.length !== 0 ?
@@ -282,7 +282,7 @@ class App extends Component {
                             ))
                             :
                             this.state.search !== "" && this.state.FerryRoute === null ?
-                                <li className={"noResult"}><i className="fa fa-frown"></i> <br/>Vi hittade inga färjor med det namnet</li>
+                                <li className={"noResult"}><i className="fa fa-frown"/> <br/>Vi hittade inga färjor med det namnet</li>
                                 :
                                 null
                         }
@@ -308,7 +308,18 @@ class App extends Component {
                         })()}
                         { this.state.Departures.length > 0 ?
                         <ul className={"Departures box"}>
-                            <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}</span>
+                            <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}
+                                <i onClick={(e) => {
+                                    let el = e.target;
+                                    el.classList.add("spin");
+                                    this.getDepartures(this.state.FerryRoute.Id).then(Departures => {
+                                        this.setState({Departures});
+                                        setTimeout(function(){
+                                            el.classList.remove("spin")
+                                        },500)
+                                    });
+                                }} className="fa fa-redo-alt"/>
+                            </span>
                             {this.state.Departures.map((Departure) => {
                                 if(this.state.filter.hasOwnProperty("FromHarbor")){
                                     if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
