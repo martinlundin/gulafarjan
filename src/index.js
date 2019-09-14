@@ -12,9 +12,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.register();
 
 let deferredPrompt;
-
 window.addEventListener('load', (e) => {
     let btnAdd = document.getElementById("pwaInstall");
+    btnAdd.style.display = 'flex';
 
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
@@ -23,7 +23,6 @@ window.addEventListener('load', (e) => {
         e.preventDefault();
         // Stash the event so it can be triggered later.
         deferredPrompt = e;
-        btnAdd.style.display = 'block';
     });
 
     btnAdd.addEventListener('click', (e) => {

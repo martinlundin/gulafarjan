@@ -218,6 +218,7 @@ class App extends Component {
         this.state = {
             isLoaded: false,
             search: "",
+            focus: false,
             filter: {},
             FerryRoute: null,
             FerryRoutes: [],
@@ -255,12 +256,14 @@ class App extends Component {
 
     render() {
         return (
-            <div className={`App ${this.state.search ? "searched" : ""}`}>
+            <div className={`App`}>
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
                 <header id={"header"}>
                     <div id={"searchBar"}>
                         <input
                             onChange={this.inputSearchHandler}
+                            onFocus={()=>{this.setState({focus:true})}}
+                            onBlur={()=>{this.setState({focus:false})}}
                             value={this.state.search}
                             className={"box"}
                             name={"search"}
@@ -321,11 +324,7 @@ class App extends Component {
                 <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
                     <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
                 </div>
-                {this.state.FerryRoute === null ?
-                    <Home/>
-                    :
-                    null
-                }
+                <Home focus={`${this.state.focus || this.state.search ? "hide" : ""}`}/>
             </div>
         );
     }

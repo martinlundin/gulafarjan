@@ -38,7 +38,7 @@ export class MapComponent extends Component {
         let offset = 20;
         let padding = {
             top: document.getElementById("header").clientHeight+offset,
-            bottom: document.getElementById("home").clientHeight+offset,
+            bottom: offset,
             left: offset,
             right: offset
         };

@@ -4619,12 +4619,22 @@ readers do not read off random characters that represent icons */
     border-radius: 5px;
     box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
     background: white; }
-  .App .padding {
-    padding: 15px; }
   .App #pwaInstall {
-    display: none; }
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    background: #feda4a;
+    color: #333333;
+    font-weight: bold;
+    justify-content: center;
+    box-shadow: -15px 0px 15px -15px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    padding: 10px; }
+    .App #pwaInstall i {
+      font-size: 25px;
+      padding: 5px; }
   .App #home {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -4633,7 +4643,13 @@ readers do not read off random characters that represent icons */
     color: #feda4a;
     width: calc(100% - 10px);
     margin: 5px auto;
-    max-width: 380px; }
+    max-width: 380px;
+    overflow: hidden;
+    transition: all 1s; }
+    .App #home.hide {
+      transform: translateY(150%); }
+    .App #home .intro {
+      padding: 10px; }
     .App #home h1 {
       margin: 0;
       font-size: 18px; }
@@ -4813,3 +4829,7 @@ readers do not read off random characters that represent icons */
   .App #header, .App #main {
     max-width: 380px;
     margin: 0 auto; } }
+
+@media all and (display-mode: standalone) {
+  body .App #home {
+    display: none; } }
