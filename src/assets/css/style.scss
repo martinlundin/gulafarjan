@@ -61,15 +61,59 @@ $yellow: #feda4a;
     left: 0;
     right:0;
     display:flex;
-    background:rgba($dark,0.9 );
+    flex-wrap: wrap;
+    background:rgba($dark,0.95);
     color:$yellow;
     width:calc(100% - 10px);
     margin:5px auto;
     max-width:380px;
-    overflow: hidden;
+    max-height:calc(100vh - 70px);
+    overflow: auto;
     transition:all 1s;
+    a{
+      color:$yellow;
+    }
     &.hide{
       transform: translateY(150%);
+    }
+    >div{
+      display:flex;
+      flex: 0 1 100%;
+    }
+    .infoButton{
+      position:absolute;
+      top:0;
+      left:0;
+      font-size:14px;
+      width:22px;
+      background:$yellow;
+      color:$dark;
+      text-align: center;
+      display:block;
+      padding:5px;
+      border-radius:0 0 5px 0;
+      cursor:pointer;
+    }
+    #extraInfo{
+      display:flex;
+      flex-direction: column;
+      max-height: 0;
+      padding:0 10px;
+      transition:padding 0.3s, max-height 1s;
+      &.show{
+        max-height: 450px;
+        padding:10px;
+      }
+      h2{
+        font-size:16px;
+        font-weight:bold;
+        margin-bottom:0;
+        margin-top:10px;
+      }
+      p{
+        font-size:14px;
+        margin:5px 0;
+      }
     }
     .intro{
       padding:10px;
@@ -87,7 +131,7 @@ $yellow: #feda4a;
       max-width: 80px;
       margin: 0 auto;
       align-self: center;
-      padding:5px;
+      padding:5px 5px 5px 10px;
     }
   }
 
@@ -100,6 +144,7 @@ $yellow: #feda4a;
 
     #searchBar {
       position:relative;
+      overflow:hidden;
       input{
         margin-bottom:0;
         border: 0;
@@ -107,7 +152,7 @@ $yellow: #feda4a;
         font-size: 18px;
         font-weight: 500;
         outline: 0;
-        width: calc(100% - 10px);
+        width: 100%;
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         -ms-transition: all 0.3s ease-in-out;
@@ -124,14 +169,12 @@ $yellow: #feda4a;
         }
       }
       #resetSearch{
-        color:$dark;
+        color: $dark;
         position:absolute;
         top: 0;
         right: 0;
         padding: 16px 15px;
-        opacity: 0.7;
         z-index:10;
-        margin:5px;
       }
     }
 

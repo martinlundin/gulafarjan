@@ -259,16 +259,15 @@ class App extends Component {
             <div className={`App`}>
                 <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
                 <header id={"header"}>
-                    <div id={"searchBar"}>
+                    <div id={"searchBar"} className={"box"}>
                         <input
                             onChange={this.inputSearchHandler}
                             onFocus={()=>{this.setState({focus:true})}}
                             onBlur={()=>{this.setState({focus:false})}}
                             value={this.state.search}
-                            className={"box"}
                             name={"search"}
-                            placeholder={"Sök färja"}
-                            aria-label={"Sök färja"}
+                            placeholder={"Sök färjeled eller hamn"}
+                            aria-label={"Sök färjeled eller hamn"}
                             autoComplete={"off"}
                         />
                         {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"/></span> : null}

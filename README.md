@@ -2,7 +2,7 @@
 
 # Gulafärjan
 **När går nästa färja?** <br/>
-Gulafärjan är ett projekt för att göra det enklare att veta när nästa bilfärja går. Nu slipper du dra fram den rassliga gamla pappers tabellen från vägverket som ändå var helt omöjlig att förstå sig på.
+Gulafärjan är ett projekt för att göra det enklare att veta när nästa bilfärja går. Nu slipper du dra fram den rassliga gamla pappers tabellen från Trafikverket som ändå var helt omöjlig att förstå sig på.
 Se projektet live här **https://www.gulafarjan.se**
 
 Projektet är en webbapp som hämtar sin data från Trafikverkets API (http://api.trafikinfo.trafikverket.se/API/).

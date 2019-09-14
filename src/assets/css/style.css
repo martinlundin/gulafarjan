@@ -4651,15 +4651,52 @@ readers do not read off random characters that represent icons */
     left: 0;
     right: 0;
     display: flex;
-    background: rgba(51, 51, 51, 0.9);
+    flex-wrap: wrap;
+    background: rgba(51, 51, 51, 0.95);
     color: #feda4a;
     width: calc(100% - 10px);
     margin: 5px auto;
     max-width: 380px;
-    overflow: hidden;
+    max-height: calc(100vh - 70px);
+    overflow: auto;
     transition: all 1s; }
+    .App #home a {
+      color: #feda4a; }
     .App #home.hide {
       transform: translateY(150%); }
+    .App #home > div {
+      display: flex;
+      flex: 0 1 100%; }
+    .App #home .infoButton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 14px;
+      width: 22px;
+      background: #feda4a;
+      color: #333333;
+      text-align: center;
+      display: block;
+      padding: 5px;
+      border-radius: 0 0 5px 0;
+      cursor: pointer; }
+    .App #home #extraInfo {
+      display: flex;
+      flex-direction: column;
+      max-height: 0;
+      padding: 0 10px;
+      transition: padding 0.3s, max-height 1s; }
+      .App #home #extraInfo.show {
+        max-height: 450px;
+        padding: 10px; }
+      .App #home #extraInfo h2 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 0;
+        margin-top: 10px; }
+      .App #home #extraInfo p {
+        font-size: 14px;
+        margin: 5px 0; }
     .App #home .intro {
       padding: 10px; }
     .App #home h1 {
@@ -4673,7 +4710,7 @@ readers do not read off random characters that represent icons */
       max-width: 80px;
       margin: 0 auto;
       align-self: center;
-      padding: 5px; }
+      padding: 5px 5px 5px 10px; }
   .App #header {
     display: flex;
     flex-direction: column;
@@ -4681,7 +4718,8 @@ readers do not read off random characters that represent icons */
     position: relative;
     z-index: 1; }
     .App #header #searchBar {
-      position: relative; }
+      position: relative;
+      overflow: hidden; }
       .App #header #searchBar input {
         margin-bottom: 0;
         border: 0;
@@ -4689,7 +4727,7 @@ readers do not read off random characters that represent icons */
         font-size: 18px;
         font-weight: 500;
         outline: 0;
-        width: calc(100% - 10px);
+        width: 100%;
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         -ms-transition: all 0.3s ease-in-out;
@@ -4709,9 +4747,7 @@ readers do not read off random characters that represent icons */
         top: 0;
         right: 0;
         padding: 16px 15px;
-        opacity: 0.7;
-        z-index: 10;
-        margin: 5px; }
+        z-index: 10; }
     .App #header #searchResults {
       padding: 0;
       list-style: none;
