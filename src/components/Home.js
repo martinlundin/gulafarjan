@@ -13,7 +13,7 @@ class Home extends React.Component {
             <div id={"home"} className={`box ${this.props.focus}`}>
                 <div>
                     <span className={"infoButton"} onClick={() => {this.setState({extraInfo: !this.state.extraInfo})}}><i className={`fa fa-${this.state.extraInfo ? "times" : "info"}`}></i></span>
-                    <img className={"logo"} src={logo} alt={"Gulafärjan logo"}/>
+                    <img className={"logo"} onClick={() => {this.setState({extraInfo: !this.state.extraInfo})}} src={logo} alt={"Gulafärjan logo"}/>
                     <div className={"intro"}>
                         <h1>Gulafärjan</h1>
                         <h2>Hitta avgångar för de gula färjorna<br/>(Trafikverkets bilfärjor)</h2>
