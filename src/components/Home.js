@@ -12,13 +12,13 @@ class Home extends React.Component {
         return (
             <div id={"home"} className={`box ${this.props.focus}`}>
                 <div>
-                    <span className={"infoButton"} onClick={() => {this.setState({extraInfo: !this.state.extraInfo})}}><i className={`fa fa-${this.state.extraInfo ? "times" : "info"}`}></i></span>
+                    <span className={"infoButton"} onClick={() => {this.setState({extraInfo: !this.state.extraInfo})}}><i className={`fa fa-${this.state.extraInfo ? "times" : "info"}`}/></span>
                     <img className={"logo"} onClick={() => {this.setState({extraInfo: !this.state.extraInfo})}} src={logo} alt={"Gulafärjan logo"}/>
                     <div className={"intro"}>
                         <h1>Gulafärjan</h1>
                         <h2>Hitta avgångar för de gula färjorna<br/>(Trafikverkets bilfärjor)</h2>
                     </div>
-                    <div id={"pwaInstall"}><i className="fa fa-arrow-circle-down"></i>Spara på hemskärmen</div>
+                    <div id={"pwaInstall"}><i className="fa fa-arrow-circle-down"/>Spara på hemskärmen</div>
                 </div>
                 <div id={"extraInfo"} className={`${this.state.extraInfo ? "show" : ""}`}>
                     <h2>Tidtabell för Sveriges bilfärjor</h2>
