@@ -3,11 +3,11 @@ import axios from "axios"
 import './assets/css/style.scss';
 import Home from './components/Home'
 import HarborFilter from './components/HarborFilter'
-import DepartureComponent from './components/Departure'
 import DeviationComponent from './components/Deviation'
 import MapComponent from './components/Map'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DepartureList from "./containers/DepartureList";
 
 class App extends Component {
 
@@ -115,6 +115,13 @@ class App extends Component {
 
         return this.api(query).then(response => {
             return response.data.RESPONSE.RESULT[0].FerryAnnouncement
+        })
+    };
+
+    updateDepartures = (FerryRouteId) => {
+        return this.getDepartures(FerryRouteId).then(Departures => {
+            this.setState({Departures});
+            return Departures
         })
     };
 
@@ -289,47 +296,16 @@ class App extends Component {
                 </header>
                 <main id={"main"}>
                     <div className={"ChosenFerryRoute"}>
-                        {(() => {
-                            if (this.state.FerryRoute !== null) {
-                                return this.state.Deviations.map((Deviation) => {
-                                    if (Deviation.Id === this.state.FerryRoute.DeviationId) {
-                                        return <DeviationComponent key={Deviation.Message} Deviation={Deviation}/>
-                                    }
-                                });
-                            }
-                        })()}
-                        {(() => {
-                            if (this.state.FerryRoute !== null) {
-                                if (this.state.FerryRoute.Type.Id === 2) {
-                                    return <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/>
+                        { this.state.FerryRoute !== null ?
+                            this.state.Deviations.map((Deviation) => {
+                                if (Deviation.Id === this.state.FerryRoute.DeviationId) {
+                                    return <DeviationComponent key={Deviation.Message} Deviation={Deviation}/>
                                 }
-                            }
-                        })()}
-                        { this.state.Departures.length > 0 ?
-                        <ul className={"Departures box"}>
-                            <span className={"FerryRouteName"}>{this.state.FerryRoute.Name}
-                                <i onClick={(e) => {
-                                    let el = e.target;
-                                    el.classList.add("spin");
-                                    this.getDepartures(this.state.FerryRoute.Id).then(Departures => {
-                                        this.setState({Departures});
-                                        setTimeout(function(){
-                                            el.classList.remove("spin")
-                                        },500)
-                                    });
-                                }} className="fa fa-redo-alt"/>
-                            </span>
-                            {this.state.Departures.map((Departure) => {
-                                if(this.state.filter.hasOwnProperty("FromHarbor")){
-                                    if(Departure.FromHarbor.Name === this.state.filter.FromHarbor.Name){
-                                        return <DepartureComponent key={Departure.Id} Departure={Departure}/>
-                                    }
-                                }else{
-                                    return <DepartureComponent key={Departure.Id} Departure={Departure}/>
-                                }
-                            })}
-                        </ul>
-                        : null }
+                            })
+                            :
+                            null}
+                        { this.state.FerryRoute !== null && this.state.FerryRoute.Type.Id === 2 ? <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/> : null}
+                        { this.state.Departures.length > 0 ? <DepartureList Departures={this.state.Departures} FerryRoute={this.state.FerryRoute} filter={this.state.filter} updateDepartures={this.updateDepartures.bind(this)}/>: null }
                     </div>
                 </main>
                 <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
