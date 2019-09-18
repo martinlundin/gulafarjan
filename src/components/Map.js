@@ -66,7 +66,7 @@ export class MapComponent extends Component {
             <Map
                 google={this.props.google}
                 ref="gmap"
-                zoom={5 }
+                zoom={5}
                 style={this.state.mapStyles}
                 styles={mapStyle}
                 initialCenter={{
@@ -74,7 +74,7 @@ export class MapComponent extends Component {
                     lat: 61.29914475
                 }}
                 disableDefaultUI={true}
-                maxZoom={11}
+                maxZoom={12}
             >
                 <MarkerCluster
                     markers={this.state.avalibleFerryRoutes.map((FerryRoute) => {
