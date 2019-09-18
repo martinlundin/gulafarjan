@@ -11,6 +11,7 @@ Projektet är en webbapp som hämtar sin data från Trafikverkets API (http://ap
 Om det är något som du vill lägga till eller förbättra så skapa gärna ett Issue i github och beskriv problemet tydligt.
 
 ## Installera projektet lokalt
+- Node måste finnas installerat på datorn
 - Klona projektet från github
 - Gå in i projektets root, i terminalen kör: ``npm install``
 - För att starta projektet lokalt kör: ``npm start``
