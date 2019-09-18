@@ -4658,7 +4658,7 @@ readers do not read off random characters that represent icons */
     margin: 5px auto;
     max-width: 380px;
     max-height: calc(100vh - 70px);
-    overflow: auto;
+    overflow: hidden;
     transition: all 1s; }
     .App #home a {
       color: #feda4a; }
@@ -4687,6 +4687,7 @@ readers do not read off random characters that represent icons */
       padding: 0 10px;
       transition: padding 0.3s, max-height 1s; }
       .App #home #extraInfo.show {
+        overflow: auto;
         max-height: 450px;
         padding: 10px; }
       .App #home #extraInfo h2 {

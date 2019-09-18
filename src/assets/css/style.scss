@@ -68,7 +68,7 @@ $yellow: #feda4a;
     margin:5px auto;
     max-width:380px;
     max-height:calc(100vh - 70px);
-    overflow: auto;
+    overflow: hidden;
     transition:all 1s;
     a{
       color:$yellow;
@@ -101,6 +101,7 @@ $yellow: #feda4a;
       padding:0 10px;
       transition:padding 0.3s, max-height 1s;
       &.show{
+        overflow: auto;
         max-height: 450px;
         padding:10px;
       }
