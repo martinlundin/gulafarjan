@@ -12,8 +12,15 @@ class DepartureComponent extends React.Component {
     }
 
     renderDate = (time) => {
+        let unixTimestamp = moment(time).unix();
+        let currentUnixTimestamp = moment().unix();
+        let diff = unixTimestamp - currentUnixTimestamp;
+        let displayMinutesBetween = [900, 3600];
+
         if(moment(time).format('LL') !== moment().format('LL')) {
             return moment(time).format('LL');
+        }else if (diff > displayMinutesBetween[0] && diff < displayMinutesBetween[1]) {
+            return moment(time).format('LT');
         }
     };
 
