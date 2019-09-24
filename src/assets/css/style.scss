@@ -330,6 +330,13 @@ $yellow: #feda4a;
       }
     }
 
+    #mapOverlay{
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
+      left: 0;
+    }
   }
 
   .Map{

@@ -75,6 +75,7 @@ export class MapComponent extends Component {
                 }}
                 disableDefaultUI={true}
                 maxZoom={12}
+                gestureHandling={'greedy'}
             >
                 <MarkerCluster
                     markers={this.state.avalibleFerryRoutes.map((FerryRoute) => {

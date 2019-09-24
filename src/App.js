@@ -307,6 +307,7 @@ class App extends Component {
                         { this.state.FerryRoute !== null && this.state.FerryRoute.Type.Id === 2 ? <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/> : null}
                         { this.state.Departures.length > 0 ? <DepartureList Departures={this.state.Departures} FerryRoute={this.state.FerryRoute} filter={this.state.filter} updateDepartures={this.updateDepartures.bind(this)}/>: null }
                     </div>
+                    { this.state.Departures.length > 0 ? <div id={"mapOverlay"} onClick={()=>{this.search("")}}/>: null }
                 </main>
                 <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
                     <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
