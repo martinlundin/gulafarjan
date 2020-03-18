@@ -112,8 +112,9 @@ class App extends Component {
             },
             EXCLUDE: ["Route", "DeviationId", "ModifiedTime"]
         };
-
+        this.setState({ isLoading: true})
         return this.api(query).then(response => {
+            this.setState({ isLoading: false})
             return response.data.RESPONSE.RESULT[0].FerryAnnouncement
         })
     };
@@ -223,6 +224,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: false,
             isLoaded: false,
             search: "",
             focus: false,
@@ -298,7 +300,7 @@ class App extends Component {
                 </header>
                 <main id={"main"}>
                     <div className={"ChosenFerryRoute"}>
-                        { this.state.FerryRoute !== null ?
+                        { this.state.FerryRoute !== null && !this.state.isLoading  ?
                             this.state.Deviations.map((Deviation) => {
                                 if (Deviation.Id === this.state.FerryRoute.DeviationId) {
                                     return <DeviationComponent key={Deviation.Message} Deviation={Deviation}/>
@@ -307,7 +309,17 @@ class App extends Component {
                             :
                             null}
                         { this.state.FerryRoute !== null && this.state.FerryRoute.Type.Id === 2 ? <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/> : null}
-                        { this.state.Departures.length > 0 ? <DepartureList Departures={this.state.Departures} FerryRoute={this.state.FerryRoute} filter={this.state.filter} updateDepartures={this.updateDepartures.bind(this)}/>: null }
+                        { this.state.FerryRoute !== null && this.state.Departures.length > 0 ? <DepartureList Departures={this.state.Departures} FerryRoute={this.state.FerryRoute} filter={this.state.filter} updateDepartures={this.updateDepartures.bind(this)}/>: null }
+                        { this.state.FerryRoute !== null && this.state.Departures.length === 0 && this.state.isLoading ? 
+                            <div className="margin">
+                                <div className="loading" /> 
+                                <div className="loading light-gray" /> 
+                                <div className="loading" /> 
+                                <div className="loading light-gray" /> 
+                                <div className="loading" /> 
+                            </div>
+                            : 
+                            null }
                     </div>
                     { this.state.Departures.length > 0 ? <div id={"mapOverlay"} onClick={()=>{this.search("")}}/>: null }
                 </main>

@@ -6,6 +6,17 @@ $dark: #333333;
 $grey: #c8c8c8;
 $yellow: #feda4a;
 
+@keyframes loading {
+  0% {
+    background-position: 0;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0;
+  }
+}
 @keyframes spin {
   from {
     transform:rotate(0deg);
@@ -38,6 +49,22 @@ $yellow: #feda4a;
     background:white;
   }
 
+  .margin{
+    margin:5px;
+  }
+  .loading{
+    background-image: linear-gradient(45deg, #c7c9c7, rgb(87, 92, 92) 0%, #c7c9c7);
+    background-size: 300%;
+    animation: loading 2s ease infinite;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height:50px;
+    display:flex;
+    &.light-gray{
+      animation: loading 2s ease infinite reverse;
+      //background-image: linear-gradient(45deg, #e6e7e6, rgb(151, 155, 155) 0%, #e6e7e6);
+    }
+  }
   #pwaInstall{
     display:none;
     flex-direction: column;
@@ -266,6 +293,7 @@ $yellow: #feda4a;
         background: #ececec;
         padding: 5px 0;
         position:relative;
+        overflow: hidden;
         i{
           padding: 6px 10px;
           position: absolute;

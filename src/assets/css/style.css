@@ -4604,6 +4604,14 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
+@keyframes loading {
+  0% {
+    background-position: 0; }
+  50% {
+    background-position: 100%; }
+  100% {
+    background-position: 0; } }
+
 @keyframes spin {
   from {
     transform: rotate(0deg); }
@@ -4631,6 +4639,18 @@ readers do not read off random characters that represent icons */
     border-radius: 5px;
     box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
     background: white; }
+  .App .margin {
+    margin: 5px; }
+  .App .loading {
+    background-image: linear-gradient(45deg, #c7c9c7, #575c5c 0%, #c7c9c7);
+    background-size: 300%;
+    animation: loading 2s ease infinite;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 50px;
+    display: flex; }
+    .App .loading.light-gray {
+      animation: loading 2s ease infinite reverse; }
   .App #pwaInstall {
     display: none;
     flex-direction: column;
@@ -4819,7 +4839,8 @@ readers do not read off random characters that represent icons */
         display: inline-block;
         background: #ececec;
         padding: 5px 0;
-        position: relative; }
+        position: relative;
+        overflow: hidden; }
         .App #main .Departures .FerryRouteName i {
           padding: 6px 10px;
           position: absolute;
