@@ -235,6 +235,7 @@ class App extends Component {
             Departures: [],
             Interval: null,
         };
+        this.searchInput = React.createRef();
     }
 
     componentDidMount() {
@@ -268,6 +269,7 @@ class App extends Component {
                 <header id={"header"}>
                     <div id={"searchBar"} className={"box"}>
                         <input
+                            ref={this.searchInput}
                             onChange={this.inputSearchHandler}
                             onFocus={()=>{this.setState({focus:true})}}
                             onBlur={()=>{this.setState({focus:false})}}
@@ -277,7 +279,7 @@ class App extends Component {
                             aria-label={"Sök färjeled eller hamn"}
                             autoComplete={"off"}
                         />
-                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search("")}}><i className="fa fa-times-circle"/></span> : null}
+                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search(""); this.searchInput.current.focus()}}><i className="fa fa-times-circle"/></span> : null}
                     </div>
                     <ul id={"searchResults"} className={"box"}>
                         {this.state.FerryRoutesResults.length !== 0 ?
