@@ -40,3 +40,4 @@ Om det är något som du vill lägga till eller förbättra så skapa gärna ett
 <img src="https://image.flaticon.com/icons/svg/300/300218.svg" width="32" alt="Playstore">
 </a>
 </p>
+
