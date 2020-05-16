@@ -4630,6 +4630,12 @@ readers do not read off random characters that represent icons */
 .text-center {
   text-align: center; }
 
+h1 {
+  font-size: 25px; }
+
+h2 {
+  font-size: 16px; }
+
 .App {
   min-height: 100vh;
   font-family: "PT Sans", sans-serif;
@@ -4638,7 +4644,8 @@ readers do not read off random characters that represent icons */
     margin: 5px;
     border-radius: 5px;
     box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
-    background: white; }
+    background: white;
+    overflow: hidden; }
   .App .margin {
     margin: 5px; }
   .App .loading {
@@ -4708,7 +4715,7 @@ readers do not read off random characters that represent icons */
       transition: padding 0.3s, max-height 1s; }
       .App #home #extraInfo.show {
         overflow: auto;
-        max-height: 450px;
+        max-height: 410px;
         padding: 10px; }
       .App #home #extraInfo h2 {
         font-size: 16px;
@@ -4807,23 +4814,29 @@ readers do not read off random characters that represent icons */
       align-items: center;
       justify-content: space-around;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      padding-bottom: 4px; }
+      -webkit-tap-highlight-color: transparent; }
       .App #main .HarborFilter span {
+        flex: 1;
         padding: 15px;
         text-align: center;
-        max-width: 50%; }
-      .App #main .HarborFilter .active {
-        font-weight: bold;
-        position: relative; }
-        .App #main .HarborFilter .active::after {
+        max-width: 50%;
+        transition: all 0.15s ease-in-out; }
+        .App #main .HarborFilter span::after {
+          transition: all 0.15s ease-in-out;
           content: "\f0d7";
           font-family: "Font Awesome 5 free";
           position: absolute;
           bottom: 0;
           left: 0;
           right: 0;
-          text-align: center; }
+          text-align: center;
+          opacity: 0; }
+      .App #main .HarborFilter .active {
+        font-weight: bold;
+        position: relative;
+        box-shadow: 0px 0px 10px -5px inset rgba(0, 0, 0, 0.5); }
+        .App #main .HarborFilter .active::after {
+          opacity: 1; }
     .App #main .Deviation {
       border-left: 5px solid #ff4e42;
       padding: 10px;
@@ -4907,6 +4920,19 @@ readers do not read off random characters that represent icons */
       background: #333333; }
     .App .Map.blur {
       filter: blur(5px); }
+  .App .FerryRouteInformation {
+    margin-top: 50px; }
+    .App .FerryRouteInformation img {
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+      max-height: 180px; }
+    .App .FerryRouteInformation .FerryRouteText {
+      padding: 10px; }
+      .App .FerryRouteInformation .FerryRouteText h1 {
+        margin: 0; }
+      .App .FerryRouteInformation .FerryRouteText h2 {
+        margin-top: 0.25em; }
 
 @media screen and (min-width: 768px) {
   .App #header, .App #main {

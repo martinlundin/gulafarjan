@@ -75,7 +75,9 @@ export class MapComponent extends Component {
                 }}
                 disableDefaultUI={true}
                 maxZoom={12}
+                minZoom={4}
                 gestureHandling={'greedy'}
+                onClick={() => this.props.searchInput.current.blur()}
             >
                 <MarkerCluster
                     markers={this.state.avalibleFerryRoutes.map((FerryRoute) => {
@@ -95,7 +97,7 @@ export class MapComponent extends Component {
                                 scaledSize: new this.props.google.maps.Size(30,30),
                                 labelOrigin: new this.props.google.maps.Point(15,35),
                             },
-                            onClick: () => {this.props.chooseFerryRoute(FerryRoute)}
+                            onClick: () => {this.props.goToFerryRoute(FerryRoute); this.props.searchInput.current.blur()}
                         }
                     })}
                 />

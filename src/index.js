@@ -1,10 +1,14 @@
 import React from 'react';
+import {BrowserRouter as Router} from "react-router-dom";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+<Router>
+    <App />
+</Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -15,6 +19,7 @@ let deferredPrompt;
 window.addEventListener('load', (e) => {
     let btnAdd = document.getElementById("pwaInstall");
 
+    
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -42,5 +47,6 @@ window.addEventListener('load', (e) => {
                 deferredPrompt = null;
             });
     });
+
 
 });

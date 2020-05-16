@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    withRouter
+  } from "react-router-dom";
 import axios from "axios"
 import './assets/css/style.scss';
 import Home from './components/Home'
-import HarborFilter from './components/HarborFilter'
-import DeviationComponent from './components/Deviation'
 import MapComponent from './components/Map'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DepartureList from "./containers/DepartureList";
+import Ferry from './router/Ferry'
 
 class App extends Component {
 
@@ -119,13 +123,6 @@ class App extends Component {
         })
     };
 
-    updateDepartures = (FerryRouteId) => {
-        return this.getDepartures(FerryRouteId).then(Departures => {
-            this.setState({Departures});
-            return Departures
-        })
-    };
-
     filterFerryRoutes = (search) => {
         return this.state.FerryRoutes.filter(FerryRoute => {
             if (search !== "") {
@@ -173,8 +170,32 @@ class App extends Component {
         this.closeChosenFerryRoute()
     };
 
-    chooseFerryRoute = (FerryRoute) => {
-        if(FerryRoute !== null){
+    getFerryRouteIdByName = (FerryRouteName) => {
+        const FerryRoute = this.state.FerryRoutes.find((FerryRoute) => {
+            return this.slugify(FerryRoute.Name) == FerryRouteName
+        })
+        return FerryRoute ? FerryRoute.Id : undefined
+    }
+
+    getFerryRouteById = (FerryRouteId) => {
+        return this.state.FerryRoutes.find((FerryRoute) => {
+            return FerryRoute.Id == FerryRouteId
+        })
+    }
+
+    goToFerryRoute = (FerryRoutesResult) => {
+        this.setState({
+            search: FerryRoutesResult.Name,
+            FerryRoute: FerryRoutesResult,
+            FerryRoutesResults: [],
+        });
+        this.props.history.push(`/${this.slugify(FerryRoutesResult.Name)}`)
+    }
+
+    chooseFerryRoute = (FerryRouteId) => {
+        if(FerryRouteId){
+            const FerryRoute = this.getFerryRouteById(FerryRouteId)
+
             //Make sure to clear previous chosen route
             this.closeChosenFerryRoute().then(r => {
                 //Set search states
@@ -195,8 +216,10 @@ class App extends Component {
                     })
                 });
                 //Set local storage for next time site is opened
-                localStorage.setItem("FerryRoute", JSON.stringify(FerryRoute));
+                localStorage.setItem("FerryRouteId", FerryRouteId);
             });
+    
+            
         }
     };
 
@@ -210,15 +233,10 @@ class App extends Component {
             });
             clearInterval(othis.state.Interval);
             //Remove FerryRoute from localstorage
-            localStorage.setItem("FerryRoute", null);
+            localStorage.removeItem("FerryRouteId");
+            document.title = "Tidtabellen för Sveriges bilfärjor - Gulafärjan"
             resolve(true)
         });
-    };
-
-    changeHarbor = (Name) => {
-        let filter = {...this.state.filter};
-        filter.FromHarbor = {Name};
-        this.setState({filter});
     };
 
     constructor(props) {
@@ -240,16 +258,44 @@ class App extends Component {
         this.searchInput = React.createRef();
     }
 
+    slugify(str){
+        str = str.replace(/^\s+|\s+$/g, '');
+
+        // Make the string lowercase
+        str = str.toLowerCase();
+
+        // Remove accents, swap ñ for n, etc
+        var from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;";
+        var to   = "AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa------";
+        for (var i=0, l=from.length ; i<l ; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        // Remove invalid chars
+        str = str.replace(/[^a-z0-9 -]/g, '') 
+        // Collapse whitespace and replace by -
+        .replace(/\s+/g, '-') 
+        // Collapse dashes
+        .replace(/-+/g, '-'); 
+
+        return str;
+    }
+
     componentDidMount() {
+
         //If localstorage exist set those routes until we get response with new ones
         if(localStorage.getItem("FerryRoutes")){
             let FerryRoutes = JSON.parse(localStorage.getItem("FerryRoutes"));
+
             this.setState({FerryRoutes});
         }
+
+
         this.getFerryRoutes().then(FerryRoutes => {
             //If localstorage is set choose that route
-            if(localStorage.getItem("FerryRoute") !== null){
-                this.chooseFerryRoute(JSON.parse(localStorage.getItem("FerryRoute")))
+            if(localStorage.getItem("FerryRouteId") !== null){
+                let FerryRoute = this.getFerryRouteById(localStorage.getItem("FerryRouteId"))
+                this.goToFerryRoute(FerryRoute)
             }
 
             this.setState({FerryRoutes});
@@ -263,73 +309,84 @@ class App extends Component {
                 });
         });
     }
+    updateDepartures = (FerryRouteId) => {
+        return this.getDepartures(FerryRouteId).then(Departures => {
+            this.setState({Departures});
+            return Departures
+        })
+    };
+
+    changeHarbor = (Name) => {
+        let filter = {...this.state.filter};
+        filter.FromHarbor = {Name};
+        this.setState({filter});
+    };
 
     render() {
         return (
-            <div className={`App`}>
-                <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
-                <header id={"header"}>
-                    <div id={"searchBar"} className={"box"}>
-                        <input
-                            ref={this.searchInput}
-                            onChange={this.inputSearchHandler}
-                            onFocus={()=>{this.setState({focus:true})}}
-                            onBlur={()=>{this.setState({focus:false})}}
-                            value={this.state.search}
-                            name={"search"}
-                            placeholder={"Sök färjeled eller hamn"}
-                            aria-label={"Sök färjeled eller hamn"}
-                            autoComplete={"off"}
-                        />
-                        {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search(""); this.searchInput.current.focus()}}><i className="fa fa-times-circle"/></span> : null}
-                    </div>
-                    <ul id={"searchResults"} className={"box"}>
-                        {this.state.FerryRoutesResults.length !== 0 ?
-                            this.state.FerryRoutesResults.map((FerryRoutesResult) => (
-                                <li key={FerryRoutesResult.Id} onClick={() => {this.chooseFerryRoute(FerryRoutesResult)}}>
-                                    {FerryRoutesResult.Name}
-                                </li>
-                            ))
-                            :
-                            this.state.search !== "" && this.state.FerryRoute === null ?
-                                <li className={"noResult"}><i className="fa fa-frown"/> <br/>Vi hittade inga färjor med det namnet</li>
+            <div>
+                <div className={`App`}>
+                    <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
+                    <header id={"header"}>
+                        <div id={"searchBar"} className={"box"}>
+                            <input
+                                ref={this.searchInput}
+                                onChange={this.inputSearchHandler}
+                                onFocus={()=>{this.setState({focus:true})}}
+                                onBlur={()=>{this.setState({focus:false})}}
+                                value={this.state.search}
+                                name={"search"}
+                                placeholder={"Sök färjeled eller hamn"}
+                                aria-label={"Sök färjeled eller hamn"}
+                                autoComplete={"off"}
+                            />
+                            {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search(""); this.props.history.push('/')}}><i className="fa fa-times-circle"/></span> : null}
+                        </div>
+                        <ul id={"searchResults"} className={"box"}>
+                            {this.state.FerryRoutesResults.length !== 0 ?
+                                this.state.FerryRoutesResults.map((FerryRoutesResult) => (
+                                    <li key={FerryRoutesResult.Id} onClick={() => {this.goToFerryRoute(FerryRoutesResult)} } >
+                                        {FerryRoutesResult.Name}
+                                    </li>
+                                ))
                                 :
-                                null
-                        }
-                    </ul>
-                </header>
-                <main id={"main"}>
-                    <div className={"ChosenFerryRoute"}>
-                        { this.state.FerryRoute !== null && !this.state.isLoading  ?
-                            this.state.Deviations.map((Deviation) => {
-                                if (Deviation.Id === this.state.FerryRoute.DeviationId) {
-                                    return <DeviationComponent key={Deviation.Message} Deviation={Deviation}/>
-                                }
-                            })
-                            :
-                            null}
-                        { this.state.FerryRoute !== null && this.state.FerryRoute.Type.Id === 2 ? <HarborFilter Harbors={this.state.FerryRoute.Harbor} changeHarbor={this.changeHarbor.bind(this)}/> : null}
-                        { this.state.FerryRoute !== null && this.state.Departures.length > 0 ? <DepartureList Departures={this.state.Departures} FerryRoute={this.state.FerryRoute} filter={this.state.filter} updateDepartures={this.updateDepartures.bind(this)}/>: null }
-                        { this.state.FerryRoute !== null && this.state.Departures.length === 0 && this.state.isLoading ? 
-                            <div className="margin">
-                                <div className="loading" /> 
-                                <div className="loading light-gray" /> 
-                                <div className="loading" /> 
-                                <div className="loading light-gray" /> 
-                                <div className="loading" /> 
-                            </div>
-                            : 
-                            null }
+                                this.state.search !== "" && this.state.FerryRoute === null ?
+                                    <li className={"noResult"}><i className="fa fa-frown"/> <br/>Vi hittade inga färjor med det namnet</li>
+                                    :
+                                    null
+                            }
+                        </ul>
+                    </header>
+                    <main id={"main"}>
+                    <Switch>
+                        <Route exact path="/">
+                        </Route>
+                        <Route exact path="/:ferryRouteName">
+                            <Ferry 
+                                isLoading={this.state.isLoading} 
+                                filter={this.state.filter} 
+                                FerryRoute={this.state.FerryRoute} 
+                                FerryRoutes={this.state.FerryRoutes} 
+                                Deviations={this.state.Deviations} 
+                                Departures={this.state.Departures} 
+                                getFerryRouteIdByName={this.getFerryRouteIdByName}
+                                updateDepartures={this.updateDepartures} 
+                                changeHarbor={this.changeHarbor}
+                                chooseFerryRoute={this.chooseFerryRoute}
+                            />
+                            { this.state.Departures.length > 0 ? <div id={"mapOverlay"} onClick={()=>{this.search("")}}/>: null }
+                        </Route>
+                    </Switch>
+                    
+                    </main>
+                    <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
+                        <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} searchInput={this.searchInput} chooseFerryRoute={this.chooseFerryRoute.bind(this)} goToFerryRoute={this.goToFerryRoute}/>
                     </div>
-                    { this.state.Departures.length > 0 ? <div id={"mapOverlay"} onClick={()=>{this.search("")}}/>: null }
-                </main>
-                <div className={`Map${this.state.FerryRoute !== null ? " blur" : ""}`}>
-                    <MapComponent FerryRoute={this.state.FerryRoute} FerryRoutes={this.state.FerryRoutes} FerryRoutesResults={this.state.FerryRoutesResults} chooseFerryRoute={this.chooseFerryRoute.bind(this)}/>
+                    <Home focus={`${this.state.focus || this.state.search ? "hide" : ""}`}/>
                 </div>
-                <Home focus={`${this.state.focus || this.state.search ? "hide" : ""}`}/>
             </div>
         );
     }
 }
 
-export default App;
+export default withRouter(App);
