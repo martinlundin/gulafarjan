@@ -23,6 +23,7 @@ class Home extends React.Component {
                     </div>
                     <div id={"pwaInstall"}><i className="fa fa-arrow-circle-down"/>Spara på hemskärmen</div>
                 </div>
+                <div id="back-drop" onClick={() => {this.setState({extraInfo: false})}} className={`${this.state.extraInfo ? "show" : ""}`}></div>
                 <div id={"extraInfo"} className={`${this.state.extraInfo ? "show" : ""}`}>
                     <h2>Tidtabell för Sveriges bilfärjor</h2>
                     <p>Denna webbapp är utvecklad för att göra det lite enklare att veta om hur lång tid färjan går. Alla Trafikverkets bilfärjor i landet finns med här och genom att söka eller välja vilken rutt på kartan kommer man snabbt se när de nästkommande färjorna ska gå.</p>

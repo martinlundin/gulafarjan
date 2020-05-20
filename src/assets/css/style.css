@@ -4696,6 +4696,16 @@ h2 {
     .App #home .preview-inner-wrap {
       display: flex;
       cursor: pointer; }
+    .App #home #back-drop {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      display: none;
+      z-index: -1; }
+      .App #home #back-drop.show {
+        display: block; }
     .App #home .infoButton {
       position: absolute;
       top: 0;
