@@ -82,6 +82,9 @@ function Ferry(props) {
                         <div  className={"FerryRouteText"}>
                             <h1>{ props.FerryRoute.Name }</h1>
                             <p>
+                                Med gulafärjans tidtabell ser du enkelt när nästa färja går. Missa aldrig en färja igen!
+                            </p>
+                            <p>
                                 <i>Denna färjeled saknar information. Vill du skriva en liten text eller visa en fin bild på färjeleden?</i>
                             </p>
                             <p>

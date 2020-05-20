@@ -5,7 +5,8 @@
         "text": [
             "Ljusterö, i Österåker kommun, är den största ön i Stockholms skärgård som saknar broförbindelse, här tar du dig ut på ön med den gula färjan, som har tuffat på och kopplat Östanå till Ljusterö i 65 år",
             "Varje år åker ca 1 miljon person bilar den här leden, så du är inte ensam, med så många sommarstugor i området kan det under högsäsong åka ca 4 000 bilar per dag! Fastnar du i en kö rekommenderar jag att knata ner till kiosken och ta en glass... eller två.",
-            "Resan tar ca 7 minuter"
+            "Resan tar ca 7 minuter",
+            "Se exakt när färjan går, gulafärjan är bästa tidtabellen för Sveriges bilfärjor."
         ],
         "help": true
     },
@@ -15,14 +16,16 @@
         "text": [
             "I Bohusläns yttre skärgård kopplar Hönöleden ihop Lilla Varholmen och Hönö/Öckerö.",
             "Med drygt 2 miljoner fordon som åker denna led per år, så är den Sveriges mest trafikerade färjeled.",
-            "Resan tar ca 12 minuter, vilket verkar vara bland dom längsta i Sverige, njut av havet!"
+            "Resan tar ca 12 minuter, vilket verkar vara bland dom längsta i Sverige, njut av havet!",
+            "Missa inte en färja igen, med titabellen gulafärjan ser du enkelt när färjan går."
         ],
         "help": true
     },
     "gullmarsleden": {
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
-            "I Bohusläns skärgård går denna fina färjeled mellan Finnsbo och Skår. Med sin 1,85km långa färjelinje, och 10 minuter långa resa så förlänger den Länsvägen 161."
+            "I Bohusläns skärgård går denna fina färjeled mellan Finnsbo och Skår. Med sin 1,85km långa färjelinje, och 10 minuter långa resa så förlänger den Länsvägen 161.",
+            "Kom i tid till färjan, gula färjans tidtabell gör det enkelt att se när du måste åka."
         ],
         "help": true
     },
@@ -30,7 +33,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Mellan otroliga Vaxholm och magnifika Rindö, tuffar denna vackra färjaled.",
-            "Resan tar ca 6 minuter, här hinner du se fina Vaxholms fästning! (tror jag... sitter och kollar bilder på google, ser riktigt fint ut, njut av skärgården!)"
+            "Resan tar ca 6 minuter, här hinner du se fina Vaxholms fästning! (tror jag... sitter och kollar bilder på google, ser riktigt fint ut, njut av skärgården!)",
+            "Gulafärjan är tidtabellen som gör det enkelt att inte missa bilfärjan igen!"
         ],
         "help": true
     },
@@ -38,7 +42,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Ekeröleden är en betalfärjeled vilket innbär att du måste betala din biljett innan du åker ombord. Du kan köpa biljett via app, e-handel eller i automater i färjeläget. Väljer du e-handel, går du till www.farja.se",
-            "Resan tar ca 10 minuter"
+            "Resan tar ca 10 minuter",
+            "Här finns tidabellen för färjan."
         ],
         "help": true
     },
@@ -46,7 +51,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "I Bohuslän, norr om Ödsmål hittar du denna färjeled från Kolhättan till Svanesund.",
-            "Resan tar ca 5 minuter"
+            "Resan tar ca 5 minuter",
+            "Missa inte färjan igen, med gulafärjans tidtabell"
         ],
         "help": true
     },
@@ -55,7 +61,8 @@
         "text": [
             "Färjeleden påbörjades 1850 (35 år innan världens första bil byggdes...). Då var den, hör och häpna, inte trafikerad med fordon. 95 år senare tog vägverket över och bilar började åka färjan.",
             "Du tar dig mellan Kornhall och Gunnesby på Hisingen",
-            "Resan tar ca 2 minuter, vilket verkar vara bland de korstaste i Sverige, snabba puckar!"
+            "Resan tar ca 2 minuter, vilket verkar vara bland de korstaste i Sverige, snabba puckar!",
+            "Tidtabellen gör det enkelt att komma i tid till färjan."
         ],
         "help": true
     },
@@ -63,7 +70,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Från Lilla Varholmen och Björkö kan du åka med denna 950 meter långa färjeled.",
-            "Resan tar ca 5 minuter"
+            "Resan tar ca 5 minuter",
+            "Gulafärjans tidtabell hjälper dig komma i tid."
         ],
         "help": true
     },
@@ -71,7 +79,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Här tar du dig mellan Furusund och Köpmanholm på Yxlan. Tidtabellen synkar med Blidöleden (Yxlan till Blidö).",
-            "Resan tar ca 4 minuter och är avgiftsfri."
+            "Resan tar ca 4 minuter och är avgiftsfri.",
+            "Kom i tid med gulafärjans tidtabell, se när exakt när färjan avgår."
         ],
         "help": true
     },
@@ -79,7 +88,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Ta dig från Gotland till Fårö med denna magnifika färeled. Leden är under högsäsong högt trafikerad, permanentboende på Fårö har förtur.",
-            "Har inte hittat hur lång tid resan tar, någon som vet, som kan maila det till mig?"
+            "Har inte hittat hur lång tid resan tar, någon som vet, som kan maila det till mig?",
+            "Gör det enkelt, använd gulafärjans tidtabell för att se när färjan går."
         ],
         "help": true
     },
@@ -87,7 +97,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Åk mellan Yxlan och Blidö, tidtabellen synkar med Furusundsleden.",
-            "Resan tar ca 4 minuter"
+            "Resan tar ca 4 minuter",
+            "Med gulafärjans tidtabell ser du enkelt när nästa färja går."
         ],
         "help": true
     },
@@ -95,7 +106,8 @@
         "img": "https://i.imgur.com/rRceorq.jpg",
         "text": [
             "Åk på Mälarens fluffiga vatten med Tora (färjan heter så) mellan Munsön och Adelsön.",
-            "Resan tar ca 6 minuter"
+            "Resan tar ca 6 minuter",
+            "Tidtabellen för färjan hittar du här."
         ],
         "help": true
     }
