@@ -4691,9 +4691,11 @@ h2 {
       color: #feda4a; }
     .App #home.hide {
       transform: translateY(150%); }
-    .App #home > div {
+    .App #home .preview-wrap {
+      display: flex; }
+    .App #home .preview-inner-wrap {
       display: flex;
-      flex: 0 1 100%; }
+      cursor: pointer; }
     .App #home .infoButton {
       position: absolute;
       top: 0;

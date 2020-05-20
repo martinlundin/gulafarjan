@@ -111,9 +111,12 @@ h2{
     &.hide{
       transform: translateY(150%);
     }
-    >div{
+    .preview-wrap{
       display:flex;
-      flex: 0 1 100%;
+    }
+    .preview-inner-wrap{
+      display:flex;
+      cursor: pointer;
     }
     .infoButton{
       position:absolute;
