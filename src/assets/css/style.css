@@ -4846,7 +4846,7 @@ h2 {
       .App #main .HarborFilter .active {
         font-weight: bold;
         position: relative;
-        box-shadow: 0px 0px 10px -5px inset rgba(0, 0, 0, 0.5); }
+        box-shadow: 0px 0px 10px -3px inset rgba(0, 0, 0, 0.9); }
         .App #main .HarborFilter .active::after {
           opacity: 1; }
     .App #main .Deviation {
