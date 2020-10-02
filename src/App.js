@@ -19,7 +19,7 @@ class App extends Component {
     api = (query) => {
         return axios({
             method: "post",
-            url: "https://api.trafikinfo.trafikverket.se/v1.3/data.json",
+            url: "https://api.trafikinfo.trafikverket.se/v2/data.json",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -44,7 +44,8 @@ class App extends Component {
 
     getFerryRoutes = () => {
         let query = {
-            objecttype: "FerryRoute"
+            objecttype: "FerryRoute",
+            schemaversion: "1.2" 
         };
 
         return this.api(query).then(response => {
@@ -55,6 +56,7 @@ class App extends Component {
     getDeviations = (ids, timeDiff = "-0.00:01:00") => {
         let query = {
             objecttype: "Situation",
+            schemaversion: "1.4",
             FILTER: {
                 ELEMENTMATCH: [{
                     OR: [{
@@ -98,6 +100,7 @@ class App extends Component {
     getDepartures = (routeId, timeDiff = "-0.00:01:00", limit = 10) => {
         let query = {
             objecttype: "FerryAnnouncement",
+            schemaversion: "1.2",
             limit: limit,
             orderby: "DepartureTime asc",
             FILTER: {
