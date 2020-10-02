@@ -110,5 +110,14 @@
             "Tidtabellen för färjan hittar du här."
         ],
         "help": true
+    },
+    "sund-jarenleden": {
+        "img": "https://i.imgur.com/CpwVWWD.jpg",
+        "text": [
+            "I sjön Stora Le beläget i det fina Dalsland går denna färja mellan Sund och Jaren.",
+            "Resan tar ca 10 minuter",
+            "Här i gulafärjans tidtabell hittar du enkelt när nästa färja går i Sund-Jarenleden."
+        ],
+        "help": true
     }
 }
