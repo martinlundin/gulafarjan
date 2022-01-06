@@ -12,6 +12,11 @@ import MapComponent from './components/Map'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Ferry from './router/Ferry'
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
+import MomentUtils from '@date-io/moment';
+import moment from 'moment';
+import DateTimePickerInput from './components/DateTimePickerInput';
 
 class App extends Component {
 
@@ -97,7 +102,15 @@ class App extends Component {
         })
     };
 
-    getDepartures = (routeId, timeDiff = "-0.00:01:00", limit = 10) => {
+    getDepartures = (routeId, limit = 10) => {
+
+        let time = this.state.searchDateTime || moment().subtract(1, 'minutes')
+
+        if(moment(this.state.searchDateTime).isBefore(new Date)) {
+            this.setState({ searchDateTime: null})
+            time = moment().subtract(1, 'minutes')
+        }
+
         let query = {
             objecttype: "FerryAnnouncement",
             schemaversion: "1.2",
@@ -108,7 +121,7 @@ class App extends Component {
                     {
                         GT: [{
                             name: "DepartureTime",
-                            value: "$dateadd(" + timeDiff + ")"
+                            value: time
                         }],
                         EQ: [{
                             name: "Route.Id",
@@ -173,6 +186,27 @@ class App extends Component {
         this.closeChosenFerryRoute()
     };
 
+
+    setSearchDateTime = (value) => {
+        console.log(value)
+        if(moment(value).isAfter(new Date())) {
+            this.setState({
+                searchDateTime: value,
+            });
+    
+            this.updateDepartures(this.state.FerryRoute.Id)
+        }
+    };
+
+    resetSearchDateTime = () => {
+        this.setState({
+            searchDateTime: null,
+        });
+        setTimeout(() => {
+            this.updateDepartures(this.state.FerryRoute.Id)
+        })
+    };
+
     getFerryRouteIdByName = (FerryRouteName) => {
         const FerryRoute = this.state.FerryRoutes.find((FerryRoute) => {
             return this.slugify(FerryRoute.Name) == FerryRouteName
@@ -198,6 +232,8 @@ class App extends Component {
     chooseFerryRoute = (FerryRouteId) => {
         if(FerryRouteId){
             const FerryRoute = this.getFerryRouteById(FerryRouteId)
+
+            if(this.state.Interval) clearInterval(this.state.Interval);
 
             //Make sure to clear previous chosen route
             this.closeChosenFerryRoute().then(r => {
@@ -248,6 +284,7 @@ class App extends Component {
             isLoading: false,
             isLoaded: false,
             search: "",
+            searchDateTime: null,
             focus: false,
             filter: {},
             FerryRoute: null,
@@ -331,19 +368,40 @@ class App extends Component {
                 <div className={`App`}>
                     <ToastContainer className={`text-center`} position={toast.POSITION.TOP_CENTER} hideProgressBar={true}/>
                     <header id={"header"}>
-                        <div id={"searchBar"} className={"box"}>
-                            <input
-                                ref={this.searchInput}
-                                onChange={this.inputSearchHandler}
-                                onFocus={()=>{this.setState({focus:true})}}
-                                onBlur={()=>{this.setState({focus:false})}}
-                                value={this.state.search}
-                                name={"search"}
-                                placeholder={"Sök färjeled eller hamn"}
-                                aria-label={"Sök färjeled eller hamn"}
-                                autoComplete={"off"}
-                            />
-                            {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search(""); this.props.history.push('/')}}><i className="fa fa-times-circle"/></span> : null}
+                        <div id={"searchBarWrap"}>
+                            <div id={"searchBar"} className={"box"}>
+                                <input
+                                    ref={this.searchInput}
+                                    onChange={this.inputSearchHandler}
+                                    onFocus={()=>{this.setState({focus:true})}}
+                                    onBlur={()=>{this.setState({focus:false})}}
+                                    value={this.state.search}
+                                    name={"search"}
+                                    placeholder={"Sök färjeled eller hamn"}
+                                    aria-label={"Sök färjeled eller hamn"}
+                                    autoComplete={"off"}
+                                />
+                                {this.state.search !== "" ? <span id={"resetSearch"} onClick={()=>{this.search(""); this.props.history.push('/')}}><i className="fa fa-times-circle"/></span> : null}
+                            </div>
+                            {this.state.FerryRoute !== null ? 
+                                <div id={"TimeSearchBar"}>
+                                        
+                                    <div className={"box"}>
+                                        <LocalizationProvider dateAdapter={MomentUtils}>
+                                            <MobileDateTimePicker
+                                                value={this.state.searchDateTime}
+                                                onChange={(newValue) => {
+                                                    this.setSearchDateTime(newValue);
+                                                }}
+                                                renderInput={(params) => <DateTimePickerInput textFieldProps={{...params, inputProps: {...params.inputProps, value: moment(params.inputProps.value).format('HH:mm DD MMM')}}} searchDateTimeValue={this.state.searchDateTime} reset={this.resetSearchDateTime} />}
+                                            />
+                                        </LocalizationProvider>
+                                    </div>
+
+                                </div>
+                                : 
+                                null
+                            }
                         </div>
                         <ul id={"searchResults"} className={"box"}>
                             {this.state.FerryRoutesResults.length !== 0 ?
