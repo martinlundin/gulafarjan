@@ -412,10 +412,10 @@ h2{
 
   .Map{
     position: fixed;
-    top: -25px;
-    left: -25px;
-    bottom: -25px;
-    right: -25px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
     z-index: 0;
     transition:filter 0.8s ease-in-out;
     .gm-style{
